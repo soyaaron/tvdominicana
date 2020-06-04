@@ -1,9 +1,39 @@
 [
     {
-      "albumId": 1,
+      "canalid": 1,
       "id": 1,
-      "title": "accusamus beatae ad facilis cum similique qui sunt",
-      "url": "https://via.placeholder.com/600/92c952",
-      "thumbnailUrl": "https://via.placeholder.com/150/92c952"
+      "title": "Juan ramon tv",
+      "subtitulo": "el  5"
+    },
+    {
+      "canalid": 1,
+      "id": 1,
+      "title": "Telesistema",
+      "subtitulo": "el  11"
+    },
+    {
+      "canalid": 1,
+      "id": 1,
+      "title": "Telemicro",
+      "subtitulo": "el  5"
+    },
+    {
+      "canalid": 1,
+      "id": 1,
+      "title": "Telecentro",
+      "subtitulo": "el  33"
+    },
+    {
+      "canalid": 1,
+      "id": 1,
+      "title": "Teleantillas",
+      "subtitulo": "el  2"
+    },
+    {
+      "canalid": 1,
+      "id": 1,
+      "title": "Teleayuda",
+      "subtitulo": "el  5"
     }
+
 ]

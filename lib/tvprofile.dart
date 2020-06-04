@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tvdominicana/home2.dart';
 
-class Home extends StatefulWidget {
+
+class TvProfile extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _TvProfileState createState() => _TvProfileState();
 }
 
-class _HomeState extends State<Home>{
+class _TvProfileState extends State<TvProfile>{
 
 @override
 Widget build(BuildContext context){

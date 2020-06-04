@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tvdominicana/home.dart';
 import 'package:tvdominicana/home.dart';
+import 'package:tvdominicana/home2.dart';
 
 
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
-      body: Home(),
+      body: Homepage(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
