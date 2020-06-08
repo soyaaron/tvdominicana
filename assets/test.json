@@ -2,7 +2,6 @@
     {
       "canalid": 1,
       "title": "Juan ramon tv",
-      "subtitulo": "el  5",
       "canal": "5",
       "imgURL": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Telemicro.png"
 
@@ -25,7 +24,6 @@
       "canalid": 33,
       "id": 1,
       "title": "Telecentro",
-      "subtitulo": "el  33",
       "canal": "33",
       "imgURL":"https://upload.wikimedia.org/wikipedia/commons/b/bd/Telecentro_ICON.jpg"
     },
@@ -33,7 +31,6 @@
       "canalid": 33,
       "id": 1,
       "title": "Teleayuda",
-      "subtitulo": "el  33",
       "canal": "33",
       "imgURL":"https://upload.wikimedia.org/wikipedia/commons/b/bd/Telecentro_ICON.jpg"
     }
