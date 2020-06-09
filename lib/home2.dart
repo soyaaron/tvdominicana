@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tvdominicana/tvprofile.dart';
-import 'package:tvdominicana/model.dart';
+import 'package:tvdominicana/model/model.dart';
 
 class Homepage extends StatefulWidget {
   @override

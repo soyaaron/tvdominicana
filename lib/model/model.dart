@@ -1,11 +1,37 @@
-import 'dart:convert';
+// import 'dart:convert';
+
+class Canal {
+  int canalid;
+  String title;
+  String canal;
+  String imgUrl;
+  int id;
+
+  Canal({
+    this.canalid,
+    this.title,
+    this.canal,
+    this.imgUrl,
+    this.id,
+  });
+
+  factory Canal.fromJson(Map<String, dynamic> json) => Canal(
+        canalid: json["canalid"],
+        title: json["title"],
+        canal: json["canal"],
+        imgUrl: json["imgURL"],
+        id: json["id"] == null ? null : json["id"],
+      );
+
+
+}
 
 
 
 
 
-// // To parse this JSON data, do
-// //
+// To parse this JSON data, do
+//
 
 // final dataCanal = dataCanalFromJson('assets/test.json');
 
