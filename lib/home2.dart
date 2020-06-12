@@ -10,20 +10,23 @@ class Homepage extends StatefulWidget {
 }
 
 class HomepageState extends State<Homepage> {
-  List data;
+ 
+ final dataCanal = dataCanalFromJson('assets/test.json');
+ 
+  // List data;
 
-  Future<String> loadJson() async {
-    var jsonText = await rootBundle.loadString('assets/test.json');
+  // Future<String> loadJson() async {
+  //   var jsonText = await rootBundle.loadString('assets/test.json');
 
-    setState(() {
-      data = json.decode(jsonText);
-    });
-  }
+  //   setState(() {
+  //     data = json.decode(jsonText);
+  //   });
+  // }
 
-  @override
-  void initState() {
-    this.loadJson();
-  }
+  // @override
+  // void initState() {
+  //   this.loadJson();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +39,10 @@ class HomepageState extends State<Homepage> {
           child: new FutureBuilder(
             builder: (context, snapshot) {
               return new ListView.builder(
-                itemCount: data.length,
+               // itemCount: data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: new Image.network(data[index]["imgURL"]),
+                    leading: new Image.network(dataCanal["imgURL"]),
                     title: Text(
                       data[index]["title"],
                       style:

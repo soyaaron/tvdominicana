@@ -1,36 +1,22 @@
 [
     {
-      "canalid": 1,
-      "title": "Juan ramon tv",
-      "canal": "5",
-      "imgURL": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Telemicro.png"
-
-    },
-    {
-      "canalid": 11,
-      "id": 1,
+      
+      "id": 2,
       "title": "Telesistema",
       "canal": "11",
       "imgURL":"https://lh3.googleusercontent.com/ukNME2ODBLq1pwUx2TI1NKw2IpnACIKwDJJOFDyLyzLP0Rwe51cDKdtJJrkqgJ_LG-I"        
     },
     {
-      "canalid": 5,
-      "id": 1,
+
+      "id": 3,
       "title": "Telemicro",
       "canal": "5",
       "imgURL":"https://upload.wikimedia.org/wikipedia/commons/3/3c/Telemicro.png"
     },
     {
-      "canalid": 33,
-      "id": 1,
+      
+      "id": 4,
       "title": "Telecentro",
-      "canal": "33",
-      "imgURL":"https://upload.wikimedia.org/wikipedia/commons/b/bd/Telecentro_ICON.jpg"
-    },
-    {
-      "canalid": 33,
-      "id": 1,
-      "title": "Teleayuda",
       "canal": "33",
       "imgURL":"https://upload.wikimedia.org/wikipedia/commons/b/bd/Telecentro_ICON.jpg"
     }
