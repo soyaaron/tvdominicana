@@ -13,7 +13,7 @@ class HomepageState extends State<Homepage> {
  
  final dataCanal = dataCanalFromJson('assets/test.json');
  
-  // List data;
+   List data;
 
   // Future<String> loadJson() async {
   //   var jsonText = await rootBundle.loadString('assets/test.json');
@@ -42,7 +42,7 @@ class HomepageState extends State<Homepage> {
                // itemCount: data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: new Image.network(dataCanal["imgURL"]),
+                    leading: new Image.network(data[index]["imgURL"]),
                     title: Text(
                       data[index]["title"],
                       style:
