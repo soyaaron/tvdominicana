@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tvdominicana/tvprofile.dart';
-import 'package:tvdominicana/model/model.dart';
+import 'package:tvdominicana/model.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -10,9 +10,11 @@ class Homepage extends StatefulWidget {
 }
 
 class HomepageState extends State<Homepage> {
- 
- 
-  List data;
+
+var canal = Canal.fromJson(canalMap);
+   List data;
+   
+
 
   Future<String> loadJson() async {
     var jsonText = await rootBundle.loadString('assets/test.json');
@@ -21,8 +23,7 @@ class HomepageState extends State<Homepage> {
       data = json.decode(jsonText);
     });
   }
-
-  @override
+    @override
   void initState() {
     this.loadJson();
   }
