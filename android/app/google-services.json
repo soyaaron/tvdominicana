@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "348600031905",
+    "firebase_url": "https://tvapp-dc601.firebaseio.com",
+    "project_id": "tvapp-dc601",
+    "storage_bucket": "tvapp-dc601.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348600031905:android:2c650bef340f1fb781eee0",
+        "android_client_info": {
+          "package_name": "com.aarondev.tvdominicana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348600031905-2de2bdqstrd4flri1kd4vcmuu6kgctdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXmq6SRY4IC2t1eGLTrV6BAFS9ZHdamjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348600031905-2de2bdqstrd4flri1kd4vcmuu6kgctdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
