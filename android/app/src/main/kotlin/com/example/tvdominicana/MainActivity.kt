@@ -1,4 +1,4 @@
-package com.example.tvdominicana
+package com.aarondev.tvdominicana
 
 import io.flutter.embedding.android.FlutterActivity
 
