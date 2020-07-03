@@ -11,22 +11,20 @@ class Homepage extends StatefulWidget {
 
 class HomepageState extends State<Homepage> {
 
-var canal = Canal.fromJson(canalMap);
-   List data;
-   
+//var canal = Canal.fromJson(canalMap);
+   //List data;
+   final List<Canal> = canal;
+  // Future<String> loadJson() async {
+  //   var jsonText = await rootBundle.loadString('assets/test.json');
 
-
-  Future<String> loadJson() async {
-    var jsonText = await rootBundle.loadString('assets/test.json');
-
-    setState(() {
-      data = json.decode(jsonText);
-    });
-  }
-    @override
-  void initState() {
-    this.loadJson();
-  }
+  //   setState(() {
+  //     data = json.decode(jsonText);
+  //   });
+  // }
+  //   @override
+  // void initState() {
+  //   this.loadJson();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +40,13 @@ var canal = Canal.fromJson(canalMap);
                 itemCount: data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: new Image.network(data[index]["imgURL"]),
+                   // leading: new Image.network(canal[index].imgurl),
                     title: Text(
-                      data[index]["title"],
+                      data[index].title,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    subtitle: new Text("Canal " + data[index]["canal"]),
+                    subtitle: new Text("Canal " + data[index].canal),
                     onTap: () {
                       print("presionado ");
                       Navigator.push(
