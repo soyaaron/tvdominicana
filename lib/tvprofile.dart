@@ -10,6 +10,10 @@ class TvProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(canal.title)),
+      body: Container(
+      child: Image.network(canal.imgUrl),
+
+      ),
     );
   }
 }
