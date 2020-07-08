@@ -56,10 +56,6 @@ class CanalList extends StatelessWidget{
 }
 
 
-
-//Decode
-//      var data = json.decode(snapshot.data.toString());
-
 //CARD CONCEPT
 
 // return Padding(
