@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tvdominicana/handler/model.dart';
+import 'package:video_player/video_player.dart';
 
 
 
@@ -10,9 +11,15 @@ class TvProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(canal.title)),
-      body: Container(
-      child: Image.network(canal.imgUrl),
-
+      body: Column(
+      children: <Widget>[
+        Image.network(canal.imgUrl),
+        RaisedButton.icon(onPressed: (null), 
+        icon: Icon(Icons.play_circle_outline), 
+        label: Text('Reproducir'))
+      ],
+      
+      
       ),
     );
   }

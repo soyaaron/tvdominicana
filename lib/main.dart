@@ -18,7 +18,7 @@ void main() {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz),
-            title: Text('Contribute'),
+            title: Text('Opciones'),
           ),
         ],
       ),
