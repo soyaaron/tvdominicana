@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tvdominicana/home.dart';
-import 'package:tvdominicana/home.dart';
 import 'package:tvdominicana/home2.dart';
 
 

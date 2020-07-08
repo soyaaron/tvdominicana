@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tvdominicana/home2.dart';
+import 'package:tvdominicana/handler/model.dart';
 
 
-class TvProfile extends StatefulWidget {
-  @override
-  _TvProfileState createState() => _TvProfileState();
-}
 
-class _TvProfileState extends State<TvProfile>{
+class TvProfile extends StatelessWidget {
+  final Canal canal;
+  TvProfile({Key key, this.canal}) : super(key: key);
 
-@override
-Widget build(BuildContext context){
-  return Scaffold(
-    appBar: AppBar(title: Text("TV Dominicana"),
-    ),
-  );
-}
-
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(canal.title)),
+    );
+  }
 }
