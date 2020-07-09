@@ -4,57 +4,53 @@ import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
 import 'package:http/http.dart' as http;
 
-
-
-class Homepage extends StatelessWidget{
-
-
-  @override 
-  Widget build(BuildContext context){
+class Homepage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("TV"),
       ),
       body: FutureBuilder<List<Canal>>(
-        future: fetchCanal(http.Client()),
-        builder:(context, snapshot){
-          if (snapshot.hasError) print(snapshot.error);
-          return snapshot.hasData 
-           ? CanalList(canal: snapshot.data,)
-          : Center(child: CircularProgressIndicator());
-
-      }),
+          future: fetchCanal(http.Client()),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) print(snapshot.error);
+            return snapshot.hasData
+                ? CanalList(
+                    canales: snapshot.data,
+                  )
+                : Center(child: CircularProgressIndicator());
+          }),
     );
   }
 }
 
-class CanalList extends StatelessWidget{
-   final List<Canal> canal;
-     CanalList({Key key, this.canal}):super(key:key);
+class CanalList extends StatelessWidget {
+  final List<Canal> canales;
+  CanalList({Key key, @required this.canales}) : super(key: key);
 
-     @override
-     Widget build(BuildContext context){
-       return ListView.builder(
-            itemCount: canal.length,
-            itemBuilder:(context, index){
-            return ListTile(
-              title: Text(canal[index].title),
-              subtitle: Text("Canal: "+ canal[index].canal),
-              leading: Image.network(canal[index].imgUrl),
-              onTap: (){ Navigator.push(
-                context, MaterialPageRoute(
-                  builder: (context)=>TvProfile(canal:canal[index] ),
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: canales.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(canales[index].title),
+          subtitle: Text("Canal: " + canales[index].canal),
+          leading: Image.network(canales[index].imgUrl),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TvProfile(canal: canales[index]),
               ),
-              );
-              },
             );
-           
-            },
-          );
-     }
-
+          },
+        );
+      },
+    );
+  }
 }
-
 
 //CARD CONCEPT
 

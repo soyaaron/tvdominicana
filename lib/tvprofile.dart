@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:video_player/video_player.dart';
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
 
-   // TvProfile(this.canales);
-@override
- TvProfile({Key key, this.canal}) : super(key: key);
-  _TvProfile createState() => new _TvProfile();
+  TvProfile({Key key, @required this.canal}) : super(key: key);
+  @override
+  _TvProfile createState() => new _TvProfile(canal);
 }
 
 class _TvProfile extends State<TvProfile> {
   Canal canal;
-
+  _TvProfile(Canal canal) {
+    this.canal = canal;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
