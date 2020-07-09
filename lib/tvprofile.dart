@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:video_player/video_player.dart';
 
@@ -16,6 +15,18 @@ class _TvProfile extends State<TvProfile> {
   _TvProfile(Canal canal) {
     this.canal = canal;
   }
+  VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(
+        canal.streamUrl)
+      ..initialize().then((_) {
+        setState(() {});
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +34,31 @@ class _TvProfile extends State<TvProfile> {
       body: Column(
         children: <Widget>[
           Image.network(canal.imgUrl),
+          Container(
+            child: _controller.value.initialized
+                ? AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  )
+                : Container(),
+          ),
+          FloatingActionButton(onPressed: () {
+            setState(() {
+              _controller.value.isPlaying
+                  ? _controller.pause()
+                  : _controller.play();
+            });
+          },
+          child: Icon(_controller.value.isPlaying ? Icons.pause : Icons.play_arrow),)
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 }
 
