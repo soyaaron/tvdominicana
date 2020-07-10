@@ -1,25 +1,146 @@
 [
-    {
-      
-      "id": 2,
-      "title": "Telesistema",
-      "canal": "11",
-      "imgURL":"https://lh3.googleusercontent.com/ukNME2ODBLq1pwUx2TI1NKw2IpnACIKwDJJOFDyLyzLP0Rwe51cDKdtJJrkqgJ_LG-I"        
-    },
-    {
+  {
+    
+    "id": 7,
+    "title": "Teleantillas",
+    "canal": "2",
+    "imgURL":"https://teleantillas.com.do/wp-content/uploads/2018/11/logoTeleantillas122x90.png",
+    "streamURL": "https://ss4.domint.net:3040/ta2_str/teleantillas/chunklist_w1495154507.m3u8"
+  },
+  {
+    
+    "id": 7,
+    "title": "Certv",
+    "canal": "4",
+    "imgURL":"",
+    "streamURL": "http://69.163.34.102:8630/"
+  },
+  {
+    
+    "id": 7,
+    "title": "Telemicro",
+    "canal": "5",
+    "imgURL":"",
+    "streamURL": "http://51.89.152.28/hls/tmicro.m3u8"
+  },
 
-      "id": 3,
-      "title": "Telemicro",
-      "canal": "5",
-      "imgURL":"https://upload.wikimedia.org/wikipedia/commons/3/3c/Telemicro.png"
-    },
-    {
-      
-      "id": 4,
-      "title": "Telecentro",
-      "canal": "33",
-      "imgURL":"https://upload.wikimedia.org/wikipedia/commons/b/bd/Telecentro_ICON.jpg"
-    }
+  {
+    
+    "id": 18,
+    "title": "Color Vision",
+    "canal": "9",
+    "imgURL":"",
+    "streamURL": "https://stream-01.nyc.dailymotion.com/sec(O-7bth6lxCIslucX64-RY_dHz6ZjH3w1ja1O9d35_hk)/dm/3/x7gy059/d/live-2.m3u8"
+  },
+  {
+    
+    "id": 2,
+    "title": "Telesistema",
+    "canal": "11",
+    "imgURL":"https://lh3.googleusercontent.com/ukNME2ODBLq1pwUx2TI1NKw2IpnACIKwDJJOFDyLyzLP0Rwe51cDKdtJJrkqgJ_LG-I",
+    "streamURL": "https://ss3.domint.net:3114/t11_str/telesistema/chunklist_w982109702.m3u8"
+        
+  },
+  {
+    
+    "id": 7,
+    "title": "Certv",
+    "canal": "4",
+    "imgURL":"",
+    "streamURL": "https://api.new.livestream.com/accounts/28126860/events/8555433/live.m3u8"
+  },
+  {
+    
+    "id": 9,
+    "title": "Telefuturo",
+    "canal": "23",
+    "imgURL":"http://telefuturo.com.do/home/wp-content/themes/telefuturo23/img/logo.png",
+    "streamURL": "https://ss8.domint.net:3118/tf_str/futu/chunklist_w814674442.m3u8"
+  },
+  
+  {
+    
+    "id": 6,
+    "title": "Canal 25",
+    "canal": "25",
+    "imgURL":"https://vertvonline.es/wp-content/uploads/2017/12/canal25.gif",
+    "streamURL": "https://ss3.domint.net:3122/c25_str/canal25/chunklist_w1616327302.m3u8"
+  },
+  {
+    
+    "id": 10,
+    "title": "RNN",
+    "canal": "27",
+    "imgURL":"http://canal27.com.do/wp-content/uploads/2017/10/logo.jpg",
+    "streamURL": "https://ss2.domint.net:3202/rnn_str/canal27/chunklist_w1055204391.m3u8"
+  },
+  {
+    
+    "id": 12,
+    "title": "Teleuniverso",
+    "canal": "29",
+    "imgURL":"https://teleuniversotv.com/wp-content/uploads/2018/11/logo_teleuniverso_400px.png",
+    "streamURL": "https://cdn4.hostlagarto.com:8081/teleuniverso/tracks-v1a1/mono.m3u8"
+  },
+  {
+    
+    "id": 13,
+    "title": "Sport Vision",
+    "canal": "35",
+    "imgURL":"",
+    "streamURL": "https://5b59c7a47236a.streamlock.net/sportvision35tv/sportvision35tv/chunklist_w1686255597.m3u8"
+  },
+  {
+    
+    "id": 13,
+    "title": "Teleradio América (TRA)",
+    "canal": "45",
+    "imgURL":"",
+    "streamURL": "https://ss4.domint.net:3008/tra_str/canal45/chunklist_w371400831.m3u8"
+  },
+  {
+    
+    "id": 14,
+    "title": "Ame 47",
+    "canal": "47",
+    "imgURL":"",
+    "streamURL": "https://ss6.domint.net:3028/ame_str/amecanal47/chunklist_w1595613884.m3u8"
+  },
+  {
+    
+    "id": 15,
+    "title": "TNI 51",
+    "canal": "51",
+    "imgURL":"",
+    "streamURL": "https://ss8.domint.net:3126/tni_str/tni51/chunklist_w652317762.m3u8"
+  },
+  {
+    
+    "id": 16,
+    "title": "Super TV 55",
+    "canal": "55",
+    "imgURL":"",
+    "streamURL": "https://ss8.domint.net:3128/stv_str/tv55/chunklist_w507343934.m3u8"
+  },
+  {
+    
+    "id": 17,
+    "title": "Digital Vision 63",
+    "canal": "63",
+    "imgURL":"",
+    "streamURL": "https://ss3.domint.net:3120/dv6_str/digitalvision/chunklist_w1419046045.m3u8"
+  },
+ 
+  {
+    
+    "id": 18,
+    "title": "Punta Cana TV",
+    "canal": "?",
+    "imgURL":"",
+    "streamURL": "https://cdn4.hostlagarto.com:8081/puntacanatv/tracks-v1a1/mono.m3u8"
+  }
+
+
 
 ]
 
