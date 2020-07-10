@@ -7,8 +7,7 @@ import 'package:tvdominicana/handler/model.dart';
 
 Future<List<Canal>> fetchCanal(http.Client client) async {
   final response =
-      await client.get('https://api.jsonbin.io/b/5f08609f5d4af74b0129c9c3',
-      headers: {HttpHeaders.authorizationHeader:"\$2b\$10\$iDpXkYtAx7vVB3RIsM0EjuBOFnAaxmB3FCgF1fWq/FjYMMYjs0Sly"}, 
+      await http.get('https://soyaaron.github.io/tvchanneljson/test.json',
       );
 
   // Use the compute function to run parseCanal in a separate isolate.
