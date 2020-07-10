@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:tvdominicana/handler/model.dart';
 
 Future<List<Canal>> fetchCanal(http.Client client) async {
   final response =
-      await client.get('https://json.extendsclass.com/bin/4f7ad7d3917a');
+      await client.get('https://api.jsonbin.io/b/5f08609f5d4af74b0129c9c3',
+      headers: {HttpHeaders.authorizationHeader:"\$2b\$10\$iDpXkYtAx7vVB3RIsM0EjuBOFnAaxmB3FCgF1fWq/FjYMMYjs0Sly"}, 
+      );
 
   // Use the compute function to run parseCanal in a separate isolate.
   return compute(parseCanal, response.body);
