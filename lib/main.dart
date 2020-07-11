@@ -4,6 +4,13 @@ import 'package:tvdominicana/home2.dart';
 
 void main() {
   runApp(MaterialApp(
+    //   theme: ThemeData(
+    // // Define the default brightness and colors.
+    // brightness: Brightness.dark,
+    // primaryColor: Colors.lightBlue[800],
+    // accentColor: Colors.cyan[600],
+
+    // ),
     home: Scaffold(
       body: Homepage(),
       bottomNavigationBar: BottomNavigationBar(
