@@ -17,4 +17,16 @@ class Canal {
       streamUrl: json['streamURL'] as String
     );
   }
+
+  
+  Map<String, dynamic>tojson()=>{
+    'id':id,
+    'title':title,
+    'canal':canal,
+    'imgURL':imgUrl,
+    'streamURL':streamUrl,
+  };
+
+
+
 }
