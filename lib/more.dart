@@ -62,7 +62,7 @@ class _MoreState extends State<More> {
                 onTap: () {},
               ),
               ListTile(
-                title: Text("Premium", style: TextStyle(color: Color(0xff2B5CAB),fontWeight: FontWeight.w800),),
+                title: Text("Remover Anuncios", style: TextStyle(color: Color(0xff2B5CAB),fontWeight: FontWeight.w900),),
                 leading: Icon(Icons.credit_card, color: Color(0xff2B5CAB)),
                 onTap: () {},
               ),
@@ -78,20 +78,28 @@ class _MoreState extends State<More> {
                   Share.share("Cosa");
                 },
               ),
-              ListTile(
-                title: Text("Donación al Desarrollador"),
-                leading: Icon(Icons.monetization_on, color: Colors.green),
-                onTap: () {},
-              ),
+
               ListTile(
                 title: Text("Politicas de Privacidad"),
                 leading: Icon(Icons.lock, color: Colors.grey),
-                onTap: () {},
+                onTap: () {
+                  
+                },
               ),
               ListTile(
                 title: Text("Acerca"),
                 leading: Icon(Icons.info, color: Colors.grey),
-                onTap: () {},
+                onTap: () {
+                  showAboutDialog(context: context,
+                  
+                  applicationVersion: '1.0',
+                  applicationLegalese: "No nos hacemos responsables del contenido de este lalala",
+                  
+                  children: [
+
+                  ],
+                  );
+                },
               ),
             ],
           ),

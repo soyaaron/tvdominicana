@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:tvdominicana/tvprofile.dart';
 import 'package:tvdominicana/search.dart';
-import 'package:tvdominicana/favorites.dart';
-import 'package:tvdominicana/handler/model.dart';
-import 'package:tvdominicana/handler/service.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:tvdominicana/handler/model.dart';
-import 'package:tvdominicana/handler/saved_favorites.dart';
-import 'package:share/share.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Favorites extends StatefulWidget {
   @override
@@ -20,24 +11,8 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoriteState extends State<Favorites> {
-  SavedFav savedFav = SavedFav();
-  Canal canalLoad = Canal();
 
-  loadSharedPrefs() async {
-    try {
-      Canal canal = Canal.fromJson(await savedFav.read("canal"));
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: new Text("Loaded!"),
-          duration: const Duration(milliseconds: 500)));
-      setState(() {
-        canalLoad = canal;
-      });
-    } catch (Excepetion) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: new Text("Nothing found!"),
-          duration: const Duration(milliseconds: 500)));
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,25 +74,5 @@ class _FavoriteState extends State<Favorites> {
     );
   }
 
-  listaItem(index) {
-    return ListTile(
-      title: Text(
-        canalLoad.title ?? '',
-        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
-      ),
-      subtitle: Text(
-        "Canal: " + canalLoad.canal ?? "",
-        style: TextStyle(fontSize: 14),
-      ),
-      leading: Image.network(canalLoad.imgUrl ?? ''),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TvProfile(canal: canalLoad),
-          ),
-        );
-      },
-    );
-  }
+
 }

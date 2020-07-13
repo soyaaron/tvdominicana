@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tvdominicana/handler/model.dart';
-import 'package:tvdominicana/handler/saved_favorites.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
@@ -15,12 +12,9 @@ class TvProfile extends StatefulWidget {
 }
 
 class _TvProfile extends State<TvProfile> {
-  
   //Guardar a favoritos
-  
-  SavedFav savedFav = SavedFav();
-  Canal canalSave = Canal();
-  
+
+
   //Cargar infocanal
   Canal canal;
   _TvProfile(Canal canal) {
@@ -65,16 +59,10 @@ class _TvProfile extends State<TvProfile> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Column(
-                      
                       children: <Widget>[
                         IconButton(
-                          onPressed: (){
-                            setState(() {
-                              canalSave = canal;
-                            });
-                            savedFav.save("canal",canalSave);
-
-                          },
+                          onPressed: () {
+                         },
                           icon: Icon(Icons.favorite_border),
                           tooltip: "Favorito",
                         ),
@@ -84,10 +72,10 @@ class _TvProfile extends State<TvProfile> {
                     Column(
                       children: <Widget>[
                         IconButton(
-                          
-                          onPressed: (){
-
-                            Share.share("Estoy viendo " + canal.title + " en esta app: LINK");
+                          onPressed: () {
+                            Share.share("Estoy viendo " +
+                                canal.title +
+                                " en esta app: LINK");
                           },
                           icon: Icon(Icons.share),
                           tooltip: "Compartir",
@@ -98,7 +86,7 @@ class _TvProfile extends State<TvProfile> {
                     Column(
                       children: <Widget>[
                         IconButton(
-                          onPressed: (){},
+                          onPressed: () {},
                           icon: Icon(Icons.bug_report),
                           tooltip: "Reportar",
                         ),

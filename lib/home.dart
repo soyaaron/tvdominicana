@@ -19,7 +19,7 @@ class _HomeState extends State<Homepage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeContent(),
-   // Favorites(),
+    Favorites(),
     More(),
   ];
   Widget build(BuildContext context) {
@@ -32,10 +32,10 @@ class _HomeState extends State<Homepage> {
             icon: Icon(Icons.live_tv),
             title: Text("Home"),
           ),
-          // new BottomNavigationBarItem(
-          //   icon: Icon(Icons.favorite),
-          //   title: Text("Favoritos"),
-          // ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            title: Text("Favoritos"),
+          ),
           new BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz),
             title: Text("Más"),
@@ -162,29 +162,3 @@ class CanalList extends StatelessWidget {
   }
 }
 
-//CARD CONCEPT
-
-// return Padding(
-//   padding: const EdgeInsets.all(15),
-//   child: new Card(
-
-//       child: new Column(
-//     crossAxisAlignment: CrossAxisAlignment.stretch,
-//     children: <Widget>[
-//       Container(
-//         width: 10,
-//         height: 70,
-//         child: new Image.network(data[index]["imgURL"]),
-//       ),
-//       //new Image.network(data[index]["imgURL"]),
-//       new Text(data[index]["title"],
-//         style: TextStyle(
-//             fontSize: 20, fontWeight: FontWeight.bold),
-//       ),
-//       new Text("Canal "+ data[index]["canal"]),
-//     ],
-
-//   )
-
-//   ),
-// );
