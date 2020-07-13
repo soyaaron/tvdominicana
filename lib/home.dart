@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:tvdominicana/tvprofile.dart';
 import 'package:tvdominicana/search.dart';
-import 'package:tvdominicana/favorites.dart';
 import 'package:tvdominicana/more.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
@@ -19,7 +18,6 @@ class _HomeState extends State<Homepage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeContent(),
-    Favorites(),
     More(),
   ];
   Widget build(BuildContext context) {
@@ -31,10 +29,6 @@ class _HomeState extends State<Homepage> {
           new BottomNavigationBarItem(
             icon: Icon(Icons.live_tv),
             title: Text("Home"),
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text("Favoritos"),
           ),
           new BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz),
@@ -85,12 +79,12 @@ class HomeContent extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        "Television",
-                        textAlign: TextAlign.left,
+                        "Televisión",
+                        textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.w400 ),
                       ),
                       Text(
                         "Dominicana",
-                        textAlign: TextAlign.left,
+                        textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.w400 )
                       )
                     ],
                   ),
@@ -100,7 +94,7 @@ class HomeContent extends StatelessWidget {
           ];
         },
         body: Padding(
-          padding: const EdgeInsets.only(top:20),
+          padding: const EdgeInsets.only(top:5),
           child: FutureBuilder<List<Canal>>(
               future: fetchCanal(http.Client()),
               builder: (context, snapshot) {

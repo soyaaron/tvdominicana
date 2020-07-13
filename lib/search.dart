@@ -75,8 +75,8 @@ class _BuscarCanal extends State<BuscarCanal> {
                           BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 1,
-                              blurRadius: 2,
-                              offset: Offset(0, 0))
+                              blurRadius: 1.5,
+                              offset: Offset(0, 1))
                         ],
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.all(Radius.circular(5.75))),
@@ -92,6 +92,7 @@ class _BuscarCanal extends State<BuscarCanal> {
                               resultBusqueda = canales.where((canal){
                                 var nombrecanal = canal.title.toLowerCase();
                                 return nombrecanal.contains(text);
+                                
                               }).toList();
                             });
                           },

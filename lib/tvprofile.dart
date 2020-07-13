@@ -12,9 +12,6 @@ class TvProfile extends StatefulWidget {
 }
 
 class _TvProfile extends State<TvProfile> {
-  //Guardar a favoritos
-
-
   //Cargar infocanal
   Canal canal;
   _TvProfile(Canal canal) {
@@ -28,6 +25,7 @@ class _TvProfile extends State<TvProfile> {
     super.initState();
     flickManager = FlickManager(
       videoPlayerController: VideoPlayerController.network(canal.streamUrl),
+      
     );
   }
 
@@ -61,8 +59,7 @@ class _TvProfile extends State<TvProfile> {
                     Column(
                       children: <Widget>[
                         IconButton(
-                          onPressed: () {
-                         },
+                          onPressed: () {},
                           icon: Icon(Icons.favorite_border),
                           tooltip: "Favorito",
                         ),

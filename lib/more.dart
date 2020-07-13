@@ -43,7 +43,7 @@ class _MoreState extends State<More> {
                     children: <Widget>[
                       Text(
                         "Más",
-                        textAlign: TextAlign.left,
+                        textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.w400),
                       ),
                     ],
                   ),
