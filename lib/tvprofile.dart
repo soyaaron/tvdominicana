@@ -3,15 +3,19 @@ import 'package:tvdominicana/handler/model.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
+import 'package:email_launcher/email_launcher.dart';
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
+  var mail = 'mailto:smith@example.org?subject=News&body=New%20plugin';
   TvProfile({Key key, @required this.canal}) : super(key: key);
   @override
   _TvProfile createState() => new _TvProfile(canal);
 }
 
 class _TvProfile extends State<TvProfile> {
+
+
   //Cargar infocanal
   Canal canal;
   _TvProfile(Canal canal) {
@@ -25,8 +29,17 @@ class _TvProfile extends State<TvProfile> {
     super.initState();
     flickManager = FlickManager(
       videoPlayerController: VideoPlayerController.network(canal.streamUrl),
-      
     );
+  }
+
+    //mail
+  void _launchEmail() async {
+Email email = Email(
+    to: ['aarondev98@gmail.com'],
+    subject: "El canal "+canal.title+" está teniendo errores",
+    body: "El canal "+canal.canal+" esta teniendo error de reproducción (En caso de tener un error diferente especifique por favor)"
+);
+    await EmailLauncher.launch(email);
   }
 
   @override
@@ -59,16 +72,6 @@ class _TvProfile extends State<TvProfile> {
                     Column(
                       children: <Widget>[
                         IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.favorite_border),
-                          tooltip: "Favorito",
-                        ),
-                        Text("Favorito")
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        IconButton(
                           onPressed: () {
                             Share.share("Estoy viendo " +
                                 canal.title +
@@ -83,11 +86,11 @@ class _TvProfile extends State<TvProfile> {
                     Column(
                       children: <Widget>[
                         IconButton(
-                          onPressed: () {},
+                          onPressed: _launchEmail,
                           icon: Icon(Icons.bug_report),
                           tooltip: "Reportar",
                         ),
-                        Text("Reportar")
+                        Text("Reportar Canal")
                       ],
                     )
                   ],
@@ -96,6 +99,7 @@ class _TvProfile extends State<TvProfile> {
         ],
       ),
     );
+    // Mail
   }
 
   @override

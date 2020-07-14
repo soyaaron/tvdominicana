@@ -25,6 +25,9 @@ dependencies:
   flick_video_player: ^0.1.1
   video_player: ^0.10.11+2
   share: ^0.6.4+3
+  email_launcher: ^1.0.0
+  
+
 
 
 
