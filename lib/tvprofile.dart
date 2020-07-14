@@ -14,8 +14,6 @@ class TvProfile extends StatefulWidget {
 }
 
 class _TvProfile extends State<TvProfile> {
-
-
   //Cargar infocanal
   Canal canal;
   _TvProfile(Canal canal) {
@@ -32,13 +30,14 @@ class _TvProfile extends State<TvProfile> {
     );
   }
 
-    //mail
+  //mail
   void _launchEmail() async {
-Email email = Email(
-    to: ['aarondev98@gmail.com'],
-    subject: "El canal "+canal.title+" está teniendo errores",
-    body: "El canal "+canal.canal+" esta teniendo error de reproducción (En caso de tener un error diferente especifique por favor)"
-);
+    Email email = Email(
+        to: ['aarondev98@gmail.com'],
+        subject: "El canal " + canal.title + " está teniendo errores",
+        body: "El canal " +
+            canal.canal +
+            " esta teniendo error de reproducción (En caso de tener un error diferente especifique por favor)");
     await EmailLauncher.launch(email);
   }
 
