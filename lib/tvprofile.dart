@@ -37,7 +37,7 @@ void _loadBannerAd(){
   void initState() {
 //Caargar anuncios
     _bannerAd = BannerAd(adUnitId: AdManager.bannerAdUnitId,
-    size: AdSize.fullBanner,
+    size: AdSize.mediumRectangle,
     );
     _loadBannerAd();
     
