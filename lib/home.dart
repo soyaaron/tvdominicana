@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:tvdominicana/ad_manager.dart';
 
-
 class Homepage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -18,8 +17,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
-  //Carga de ads 
-  //ads 
+  //Carga de ads
+  //ads
   // Future<void> _initAdMob() {
   //   // TODO: Initialize AdMob SDK
   //   return FirebaseAdMob.instance.initialize(appId: AdManager.appId);
@@ -77,7 +76,8 @@ class HomeContent extends StatelessWidget {
                     padding: EdgeInsets.only(right: 15, top: 31.25),
                     icon: Icon(Icons.share),
                     onPressed: () {
-                      Share.share("¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
+                      Share.share(
+                          "¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
                     }),
               ],
               flexibleSpace: FlexibleSpaceBar(
@@ -90,12 +90,12 @@ class HomeContent extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Televisión",
-                        textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.w400 ),
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontWeight: FontWeight.w400),
                       ),
-                      Text(
-                        "Dominicana",
-                        textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.w400 )
-                      )
+                      Text("Dominicana",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontWeight: FontWeight.w400))
                     ],
                   ),
                 ),
@@ -104,7 +104,7 @@ class HomeContent extends StatelessWidget {
           ];
         },
         body: Padding(
-          padding: const EdgeInsets.only(top:5),
+          padding: const EdgeInsets.only(top: 5),
           child: FutureBuilder<List<Canal>>(
               future: fetchCanal(http.Client()),
               builder: (context, snapshot) {
@@ -132,6 +132,48 @@ class HomeContent extends StatelessWidget {
     );
   }
 }
+
+// class CanalList extends StatelessWidget {
+//   BannerAd _bannerAd;
+
+//   final List<Canal> canales;
+//   CanalList({Key key, @required this.canales}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView.separated(
+//       itemCount: canales.length,
+//       itemBuilder: (context, index) {
+//         return ListTile(
+//           title: Text(
+//             canales[index].title,
+//             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
+//           ),
+//           subtitle: Text(
+//             "Canal: " + canales[index].canal,
+//             style: TextStyle(fontSize: 14),
+//           ),
+//           leading: Image.network(canales[index].imgUrl),
+//           onTap: () {
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(
+//                 builder: (context) => TvProfile(canal: canales[index]),
+//               ),
+//             );
+//           },
+//         );
+//       },
+//       separatorBuilder: (context, index) {
+//         return Container(
+//           child: (index != 0 & index % 5) ?
+//           BannerAd(adUnitId: getBannerAdUnitId(), adSize:
+//           AdmobBannerSize.BANNER, listener: (AdmobAdEvent event, Map args)
+//         );
+//       },
+//     );
+//   }
+// }
 
 class CanalList extends StatelessWidget {
   final List<Canal> canales;
@@ -165,4 +207,3 @@ class CanalList extends StatelessWidget {
     );
   }
 }
-

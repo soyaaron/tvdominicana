@@ -37,7 +37,7 @@ void _loadBannerAd(){
   void initState() {
 //Caargar anuncios
     _bannerAd = BannerAd(adUnitId: AdManager.bannerAdUnitId,
-    size: AdSize.mediumRectangle,
+    size: AdSize.smartBanner,
     );
     _loadBannerAd();
     
@@ -68,10 +68,10 @@ void _loadBannerAd(){
           Container(child: FlickVideoPlayer(flickManager: flickManager)),
           //Botones de informacion
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(15),
             child: Container(
                 width: 350,
-                height: 75,
+                height: 70,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
