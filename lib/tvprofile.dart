@@ -4,16 +4,27 @@ import 'package:video_player/video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
 import 'package:email_launcher/email_launcher.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+import 'package:tvdominicana/ad_manager.dart';
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
-  var mail = 'mailto:smith@example.org?subject=News&body=New%20plugin';
   TvProfile({Key key, @required this.canal}) : super(key: key);
   @override
   _TvProfile createState() => new _TvProfile(canal);
 }
 
 class _TvProfile extends State<TvProfile> {
+  
+//Caargar anuncios
+BannerAd _bannerAd;
+
+void _loadBannerAd(){
+  _bannerAd
+  ..load()
+  ..show(anchorType:AnchorType.bottom);
+}
+
   //Cargar infocanal
   Canal canal;
   _TvProfile(Canal canal) {
@@ -24,6 +35,13 @@ class _TvProfile extends State<TvProfile> {
   FlickManager flickManager;
   @override
   void initState() {
+//Caargar anuncios
+    _bannerAd = BannerAd(adUnitId: AdManager.bannerAdUnitId,
+    size: AdSize.fullBanner,
+    );
+    _loadBannerAd();
+    
+  //Video
     super.initState();
     flickManager = FlickManager(
       videoPlayerController: VideoPlayerController.network(canal.streamUrl),
@@ -37,7 +55,7 @@ class _TvProfile extends State<TvProfile> {
         subject: "El canal " + canal.title + " está teniendo errores",
         body: "El canal " +
             canal.canal +
-            " esta teniendo error de reproducción (En caso de tener un error diferente especifique por favor)");
+            " está teniendo error de reproducción (En caso de tener un error diferente por favor especifique)");
     await EmailLauncher.launch(email);
   }
 
@@ -72,9 +90,9 @@ class _TvProfile extends State<TvProfile> {
                       children: <Widget>[
                         IconButton(
                           onPressed: () {
-                            Share.share("Estoy viendo " +
+                            Share.share("¡Estoy viendo " +
                                 canal.title +
-                                " en esta app: LINK");
+                                " en esta aplicación! Descargala aquí y disfruta: https://www.google.com/");
                           },
                           icon: Icon(Icons.share),
                           tooltip: "Compartir",
@@ -103,6 +121,9 @@ class _TvProfile extends State<TvProfile> {
 
   @override
   void dispose() {
+
+    _bannerAd?.dispose();
+
     flickManager.dispose();
     super.dispose();
   }

@@ -6,6 +6,9 @@ import 'package:tvdominicana/more.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_admob/firebase_admob.dart';
+import 'package:tvdominicana/ad_manager.dart';
+
 
 class Homepage extends StatefulWidget {
   @override
@@ -15,6 +18,13 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
+  //Carga de ads 
+  //ads 
+  // Future<void> _initAdMob() {
+  //   // TODO: Initialize AdMob SDK
+  //   return FirebaseAdMob.instance.initialize(appId: AdManager.appId);
+  // }
+
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeContent(),
@@ -67,7 +77,7 @@ class HomeContent extends StatelessWidget {
                     padding: EdgeInsets.only(right: 15, top: 31.25),
                     icon: Icon(Icons.share),
                     onPressed: () {
-                      Share.share("Descargame");
+                      Share.share("¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
                     }),
               ],
               flexibleSpace: FlexibleSpaceBar(
