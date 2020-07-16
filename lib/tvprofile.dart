@@ -15,31 +15,31 @@ class TvProfile extends StatefulWidget {
 }
 
 class _TvProfile extends State<TvProfile> {
-  
-//Caargar anuncios
-BannerAd _bannerAd;
 
-void _loadBannerAd(){
-  _bannerAd
-  ..load()
-  ..show(anchorType:AnchorType.bottom);
-}
+Canal canal;
+BannerAd _bannerAd;
+FlickManager flickManager;
+
+// void _loadBannerAd(){
+//   _bannerAd
+//   ..load()
+//   ..show(anchorType:AnchorType.bottom);
+// }
 
   //Cargar infocanal
-  Canal canal;
+  
   _TvProfile(Canal canal) {
     this.canal = canal;
   }
 
-  //Video
-  FlickManager flickManager;
+
   @override
   void initState() {
 //Caargar anuncios
-    _bannerAd = BannerAd(adUnitId: AdManager.bannerAdUnitId,
-    size: AdSize.smartBanner,
-    );
-    _loadBannerAd();
+    // _bannerAd = BannerAd(adUnitId: AdManager.bannerAdUnitId,
+    // size: AdSize.smartBanner,
+    // );
+    // _loadBannerAd();
     
   //Video
     super.initState();
@@ -103,7 +103,7 @@ void _loadBannerAd(){
                     Column(
                       children: <Widget>[
                         IconButton(
-                          onPressed: _launchEmail,
+                          onPressed: _mailconfirm,
                           icon: Icon(Icons.bug_report),
                           tooltip: "Reportar",
                         ),
@@ -117,6 +117,35 @@ void _loadBannerAd(){
       ),
     );
     // Mail
+  }
+
+//confirmacion correo
+  void _mailconfirm() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: AlertDialog(
+            shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(45))),
+            title: new Text("Reportar Fallo en Canal"),
+            content: SingleChildScrollView(
+              child: new Text("Se abrirá su aplicación de correos para enviar el reporte. ¿Desea continuar?"),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Cerrar"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                
+              ),
+              new FlatButton(onPressed: _launchEmail, child: new Text("Continuar"),)
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
