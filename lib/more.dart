@@ -66,6 +66,11 @@ class _MoreState extends State<More> {
                 Share.share("¡Descarga Television Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
               },
             ),
+                        ListTile(
+              title: Text("Sugerir Canal"),
+              leading: Icon(Icons.add_circle_outline, color: Colors.grey),
+              onTap: _launchSuggestion,
+            ),
             ListTile(
               title: Text("Contacta al Desarrollador"),
               leading: Icon(Icons.mail_outline, color: Colors.grey),
@@ -87,6 +92,14 @@ class _MoreState extends State<More> {
     Email email = Email(
       to: ['aarondev98@gmail.com'],
       subject: "Contacto al desarrollador",
+    );
+    await EmailLauncher.launch(email);
+  }
+  // Sugerencia canal
+   void _launchSuggestion() async {
+    Email email = Email(
+      to: ['aarondev98@gmail.com'],
+      subject: "Sugerencia de canal",
     );
     await EmailLauncher.launch(email);
   }

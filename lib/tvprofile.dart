@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:video_player/video_player.dart';
@@ -5,7 +7,9 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
 import 'package:email_launcher/email_launcher.dart';
 import 'package:firebase_admob/firebase_admob.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:tvdominicana/ad_manager.dart';
+
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
@@ -109,10 +113,15 @@ FlickManager flickManager;
                         ),
                         Text("Reportar Canal")
                       ],
-                    )
+                    ),
+
                   ],
                 )),
-          )
+          ),
+                              AdmobBanner(
+                      adUnitId: getBannerId(),
+                      adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
+                    ),
         ],
       ),
     );
@@ -156,4 +165,28 @@ FlickManager flickManager;
     flickManager.dispose();
     super.dispose();
   }
+
+String getAppId(){
+  String getBannerId(){
+      if (Platform.isAndroid) {
+      return "ca-app-pub-3940256099942544/8865242552";
+    } else if (Platform.isIOS) {
+      return "ca-app-pub-3940256099942544/4339318960";
+    } else {
+      throw new UnsupportedError("Unsupported platform");
+    }
 }
+}
+String getBannerId(){
+      if (Platform.isAndroid) {
+      return "ca-app-pub-3940256099942544/8865242552";
+    } else if (Platform.isIOS) {
+      return "ca-app-pub-3940256099942544/4339318960";
+    } else {
+      throw new UnsupportedError("Unsupported platform");
+    }
+}
+
+}
+
+
