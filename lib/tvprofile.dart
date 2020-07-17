@@ -10,7 +10,6 @@ import 'package:firebase_admob/firebase_admob.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:tvdominicana/ad_manager.dart';
 
-
 class TvProfile extends StatefulWidget {
   final Canal canal;
   TvProfile({Key key, @required this.canal}) : super(key: key);
@@ -19,10 +18,9 @@ class TvProfile extends StatefulWidget {
 }
 
 class _TvProfile extends State<TvProfile> {
-
-Canal canal;
-BannerAd _bannerAd;
-FlickManager flickManager;
+  Canal canal;
+  BannerAd _bannerAd;
+  FlickManager flickManager;
 
 // void _loadBannerAd(){
 //   _bannerAd
@@ -31,11 +29,10 @@ FlickManager flickManager;
 // }
 
   //Cargar infocanal
-  
+
   _TvProfile(Canal canal) {
     this.canal = canal;
   }
-
 
   @override
   void initState() {
@@ -44,8 +41,8 @@ FlickManager flickManager;
     // size: AdSize.smartBanner,
     // );
     // _loadBannerAd();
-    
-  //Video
+
+    //Video
     super.initState();
     flickManager = FlickManager(
       videoPlayerController: VideoPlayerController.network(canal.streamUrl),
@@ -114,14 +111,13 @@ FlickManager flickManager;
                         Text("Reportar Canal")
                       ],
                     ),
-
                   ],
                 )),
           ),
-                              AdmobBanner(
-                      adUnitId: getBannerId(),
-                      adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
-                    ),
+          AdmobBanner(
+            adUnitId: getBannerId(),
+            adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
+          ),
         ],
       ),
     );
@@ -139,7 +135,8 @@ FlickManager flickManager;
                 borderRadius: BorderRadius.all(Radius.circular(45))),
             title: new Text("Reportar Fallo en Canal"),
             content: SingleChildScrollView(
-              child: new Text("Se abrirá su aplicación de correos para enviar el reporte. ¿Desea continuar?"),
+              child: new Text(
+                  "Se abrirá su aplicación de correos para enviar el reporte. ¿Desea continuar?"),
             ),
             actions: <Widget>[
               new FlatButton(
@@ -147,9 +144,11 @@ FlickManager flickManager;
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                
               ),
-              new FlatButton(onPressed: _launchEmail, child: new Text("Continuar"),)
+              new FlatButton(
+                onPressed: _launchEmail,
+                child: new Text("Continuar"),
+              )
             ],
           ),
         );
@@ -159,34 +158,21 @@ FlickManager flickManager;
 
   @override
   void dispose() {
-
     _bannerAd?.dispose();
 
     flickManager.dispose();
     super.dispose();
   }
 
-String getAppId(){
-  String getBannerId(){
-      if (Platform.isAndroid) {
+
+
+  String getBannerId() {
+    if (Platform.isAndroid) {
       return "ca-app-pub-3940256099942544/8865242552";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
+  }
 }
-}
-String getBannerId(){
-      if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/8865242552";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544/4339318960";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
-}
-
-}
-
-
