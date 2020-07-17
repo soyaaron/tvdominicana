@@ -22,12 +22,6 @@ class _TvProfile extends State<TvProfile> {
   BannerAd _bannerAd;
   FlickManager flickManager;
 
-// void _loadBannerAd(){
-//   _bannerAd
-//   ..load()
-//   ..show(anchorType:AnchorType.bottom);
-// }
-
   //Cargar infocanal
 
   _TvProfile(Canal canal) {
@@ -36,11 +30,6 @@ class _TvProfile extends State<TvProfile> {
 
   @override
   void initState() {
-//Caargar anuncios
-    // _bannerAd = BannerAd(adUnitId: AdManager.bannerAdUnitId,
-    // size: AdSize.smartBanner,
-    // );
-    // _loadBannerAd();
 
     //Video
     super.initState();
@@ -64,8 +53,8 @@ class _TvProfile extends State<TvProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(canal.title)),
-      body: Column(
-        children: <Widget>[
+      body: Wrap (
+         children: <Widget>[
           Container(child: FlickVideoPlayer(flickManager: flickManager)),
           //Botones de informacion
           Padding(
@@ -97,6 +86,7 @@ class _TvProfile extends State<TvProfile> {
                           },
                           icon: Icon(Icons.share),
                           tooltip: "Compartir",
+                          
                         ),
                         Text("Compartir")
                       ],
@@ -114,12 +104,18 @@ class _TvProfile extends State<TvProfile> {
                   ],
                 )),
           ),
-          AdmobBanner(
+          Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: <Widget>[AdmobBanner(
             adUnitId: getBannerId(),
             adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
-          ),
+          ),]
+          )
+          
         ],
       ),
+      
     );
     // Mail
   }
@@ -163,8 +159,6 @@ class _TvProfile extends State<TvProfile> {
     flickManager.dispose();
     super.dispose();
   }
-
-
 
   String getBannerId() {
     if (Platform.isAndroid) {

@@ -140,13 +140,13 @@ class CanalList extends StatelessWidget {
     return ListView.separated(
       itemCount: canales.length,
             separatorBuilder: (BuildContext context, int index) {
-         if (index % 6 == 0){
+         if (index % 15 == 2){
              return AdmobBanner(
             adUnitId: getBannerId(),
             adSize: AdmobBannerSize.BANNER,
           ); 
          }
-    return Divider();
+    return Divider(height: 0, color: Color(0xffFAF4F5),);
       },
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
@@ -174,15 +174,6 @@ class CanalList extends StatelessWidget {
     );
   }
 
-  String getAppId() {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544~4354546703";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544~2594085930";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
-  }
 
   String getBannerId() {
     if (Platform.isAndroid) {
@@ -196,35 +187,3 @@ class CanalList extends StatelessWidget {
 
 }
 
-// class CanalList extends StatelessWidget {
-//   final List<Canal> canales;
-//   CanalList({Key key, @required this.canales}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: canales.length,
-//       itemBuilder: (context, index) {
-//         return ListTile(
-//           title: Text(
-//             canales[index].title,
-//             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
-//           ),
-//           subtitle: Text(
-//             "Canal: " + canales[index].canal,
-//             style: TextStyle(fontSize: 14),
-//           ),
-//           leading: Image.network(canales[index].imgUrl),
-//           onTap: () {
-//             Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                 builder: (context) => TvProfile(canal: canales[index]),
-//               ),
-//             );
-//           },
-//         );
-//       },
-//     );
-//   }
-// }
