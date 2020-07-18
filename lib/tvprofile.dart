@@ -57,52 +57,58 @@ class _TvProfile extends State<TvProfile> {
          children: <Widget>[
           Container(child: FlickVideoPlayer(flickManager: flickManager)),
           //Botones de informacion
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Container(
-                width: 350,
-                height: 70,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 2,
-                          offset: Offset(0, 0))
-                    ],
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.all(Radius.circular(5.75))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Column(
+          Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Container(
+                    width: 350,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: Offset(0, 0))
+                        ],
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(5.75))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        IconButton(
-                          onPressed: () {
-                            Share.share("¡Estoy viendo " +
-                                canal.title +
-                                " en esta aplicación! Descargala aquí y disfruta: https://www.google.com/");
-                          },
-                          icon: Icon(Icons.share),
-                          tooltip: "Compartir",
-                          
+                        Column(
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () {
+                                Share.share("¡Estoy viendo " +
+                                    canal.title +
+                                    " en esta aplicación! Descargala aquí y disfruta: https://www.google.com/");
+                              },
+                              icon: Icon(Icons.share),
+                              tooltip: "Compartir",
+                              
+                            ),
+                            Text("Compartir")
+                          ],
                         ),
-                        Text("Compartir")
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        IconButton(
-                          onPressed: _mailconfirm,
-                          icon: Icon(Icons.bug_report),
-                          tooltip: "Reportar",
+                        Column(
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: _mailconfirm,
+                              icon: Icon(Icons.bug_report),
+                              tooltip: "Reportar",
+                            ),
+                            Text("Reportar Canal")
+                          ],
                         ),
-                        Text("Reportar Canal")
                       ],
-                    ),
-                  ],
-                )),
+                    )),
+              ),
+            ],
           ),
           Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +168,7 @@ class _TvProfile extends State<TvProfile> {
 
   String getBannerId() {
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/8865242552";
+      return "ca-app-pub-3684382582844010/7891071574";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
     } else {

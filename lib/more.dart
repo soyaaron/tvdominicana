@@ -45,15 +45,6 @@ class _MoreState extends State<More> {
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: <Widget>[
-            // ListTile(
-            //   title: Text(
-            //     "Remover Anuncios",
-            //     style: TextStyle(
-            //         color: Color(0xff2B5CAB), fontWeight: FontWeight.w900),
-            //   ),
-            //   leading: Icon(Icons.star, color: Color(0xff2B5CAB)),
-            //   onTap: () {},
-            // ),
             ListTile(
               title: Text("Calificar"),
               leading: Icon(Icons.rate_review, color: Colors.grey),

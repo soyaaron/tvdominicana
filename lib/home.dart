@@ -177,7 +177,7 @@ class CanalList extends StatelessWidget {
 
   String getBannerId() {
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/8865242552";
+      return "ca-app-pub-3684382582844010/2981950703";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
     } else {
