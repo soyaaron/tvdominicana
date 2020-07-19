@@ -9,8 +9,7 @@ import 'package:tvdominicana/more.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
 import 'package:http/http.dart' as http;
-import 'package:firebase_admob/firebase_admob.dart';
-import 'package:tvdominicana/ad_manager.dart';
+
 
 class Homepage extends StatefulWidget {
   @override

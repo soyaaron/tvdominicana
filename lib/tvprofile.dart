@@ -8,7 +8,6 @@ import 'package:share/share.dart';
 import 'package:email_launcher/email_launcher.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:admob_flutter/admob_flutter.dart';
-import 'package:tvdominicana/ad_manager.dart';
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
