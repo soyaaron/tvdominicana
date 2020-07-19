@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:share/share.dart';
+import 'dart:io';
 import 'package:tvdominicana/tvprofile.dart';
 import 'package:tvdominicana/search.dart';
-import 'package:tvdominicana/favorites.dart';
 import 'package:tvdominicana/more.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
+import 'package:admob_flutter/admob_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 import 'package:http/http.dart' as http;
 
 class Homepage extends StatefulWidget {
@@ -19,7 +20,6 @@ class _HomeState extends State<Homepage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeContent(),
-    Favorites(),
     More(),
   ];
   Widget build(BuildContext context) {
@@ -31,10 +31,6 @@ class _HomeState extends State<Homepage> {
           new BottomNavigationBarItem(
             icon: Icon(Icons.live_tv),
             title: Text("Home"),
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text("Favoritos"),
           ),
           new BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz),
@@ -73,7 +69,8 @@ class HomeContent extends StatelessWidget {
                     padding: EdgeInsets.only(right: 15, top: 31.25),
                     icon: Icon(Icons.share),
                     onPressed: () {
-                      Share.share("Descargame");
+                      Share.share(
+                          "¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
                     }),
               ],
               flexibleSpace: FlexibleSpaceBar(
@@ -85,13 +82,13 @@ class HomeContent extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        "Television",
+                        "Televisión",
                         textAlign: TextAlign.left,
+                        style: TextStyle(fontWeight: FontWeight.w400),
                       ),
-                      Text(
-                        "Dominicana",
-                        textAlign: TextAlign.left,
-                      )
+                      Text("Dominicana",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontWeight: FontWeight.w400))
                     ],
                   ),
                 ),
@@ -99,8 +96,10 @@ class HomeContent extends StatelessWidget {
             ),
           ];
         },
+        //generar y cargar lista
         body: Padding(
-          padding: const EdgeInsets.only(top:20),
+          padding: const EdgeInsets.only(top: 5),
+          
           child: FutureBuilder<List<Canal>>(
               future: fetchCanal(http.Client()),
               builder: (context, snapshot) {
@@ -135,9 +134,21 @@ class CanalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: canales.length,
-      itemBuilder: (context, index) {
+      separatorBuilder: (BuildContext context, int index) {
+        if (index % 15 == 2) {
+          return AdmobBanner(
+            adUnitId: getBannerId(),
+            adSize: AdmobBannerSize.BANNER,
+          );
+        }
+        return Divider(
+          height: 0,
+          color: Color(0xffFAF4F5),
+        );
+      },
+      itemBuilder: (BuildContext context, int index) {
         return ListTile(
           title: Text(
             canales[index].title,
@@ -160,5 +171,14 @@ class CanalList extends StatelessWidget {
       },
     );
   }
-}
 
+  String getBannerId() {
+    if (Platform.isAndroid) {
+      return "ca-app-pub-3684382582844010/2981950703";
+    } else if (Platform.isIOS) {
+      return "ca-app-pub-3940256099942544/4339318960";
+    } else {
+      throw new UnsupportedError("Unsupported platform");
+    }
+  }
+}
