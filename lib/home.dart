@@ -1,139 +1,188 @@
-import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
+import 'package:tvdominicana/tvprofile.dart';
+import 'package:tvdominicana/search.dart';
+import 'package:tvdominicana/more.dart';
+import 'package:tvdominicana/handler/model.dart';
+import 'package:tvdominicana/handler/service.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart' show rootBundle;
-
-// Future<String> fetchPhotos() async {
-//     return await rootBundle.loadString('assets/test.json');
-
-// }
-// // Future<List<Photo>> fetchPhotos(http.Client client) async {
-
-// //   // final response =
-// //   //     await client.get('assets/test.json');
-
-// //   // // Use the compute function to run parsePhotos in a separate isolate.
-// //   // return compute(parsePhotos, response.body);
-// // }
-
-// // A function that converts a response body into a List<Photo>.
-// List<Photo> parsePhotos(String responseBody) {
-//   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-
-//   return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
-// }
-
-// class Photo {
-//   final int albumId;
-//   final int id;
-//   final String title;
-//   final String url;
-//   final String thumbnailUrl;
-
-//   Photo({this.albumId, this.id, this.title, this.url, this.thumbnailUrl});
-
-//   factory Photo.fromJson(Map<String, dynamic> json) {
-//     return Photo(
-//       albumId: json['albumId'] as int,
-//       id: json['id'] as int,
-//       title: json['title'] as String,
-//       url: json['url'] as String,
-//       thumbnailUrl: json['thumbnailUrl'] as String,
-//     );
-//   }
-// }
 
 
-// class Home extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final appTitle = 'Isolate Demo';
-
-//     return MaterialApp(
-//       title: appTitle,
-//       home: MyHomePage(title: appTitle),
-//     );
-//   }
-// }
-
-// class MyHomePage extends StatelessWidget {
-//   final String title;
-
-//   MyHomePage({Key key, this.title}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(title),
-//       ),
-//       body: FutureBuilder<List<Photo>>(
-//         //future: fetchPhotos(),
-//         builder: (context, snapshot) {
-//           if (snapshot.hasError) print(snapshot.error);
-
-//           return snapshot.hasData
-//               ? PhotosList(photos: snapshot.data)
-//               : Center(child: CircularProgressIndicator());
-//         },
-//       ),
-//     );
-//   }
-// }
-
-// class PhotosList extends StatelessWidget {
-//   final List<Photo> photos;
-
-//   PhotosList({Key key, this.photos}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GridView.builder(
-//       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//         crossAxisCount: 2,
-//       ),
-//       itemCount: photos.length,
-//       itemBuilder: (context, index) {
-//         return Image.network(photos[index].thumbnailUrl);
-//       },
-//     );
-//   }
-// }
-
-class JsonPage extends StatefulWidget {
+class Homepage extends StatefulWidget {
   @override
-  _JsonPageState createState() => _JsonPageState();
+  State<StatefulWidget> createState() {
+    return _HomeState();
+  }
 }
 
-class _JsonPageState extends State<JsonPage> {
-  @override
+class _HomeState extends State<Homepage> {
+
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    HomeContent(),
+    More(),
+  ];
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("assets/test.json"),),
-      body: Center(
-        child: FutureBuilder(builder: (context, snapshot){
-          var showData=json.decode(snapshot.data.toString());
-          return ListView.builder(
-            
-            itemBuilder: (BuildContext context, int index){
-              return ListTile(
-                title: Text(showData[index]['title']),
-               subtitle: Text(showData[index]['thumbnailUrl']),
-               onTap: () {
-                 print("tappd");
-               },
-              );
-            },
-            itemCount: showData.length,
-          );
-        }, future: DefaultAssetBundle.of(context).loadString("assets/test.json"),
-        
-        ),
+      body: _children[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: [
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.live_tv),
+            title: Text("Home"),
+          ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz),
+            title: Text("Más"),
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
-      
     );
   }
 }
+
+class HomeContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(45),
+                    bottomRight: Radius.circular(45)),
+              ),
+              expandedHeight: 125,
+              floating: false,
+              pinned: false,
+              actions: <Widget>[
+                IconButton(
+                    iconSize: 27,
+                    padding: EdgeInsets.only(right: 15, top: 31.25),
+                    icon: Icon(Icons.share),
+                    onPressed: () {
+                      Share.share(
+                          "¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
+                    }),
+              ],
+              flexibleSpace: FlexibleSpaceBar(
+                titlePadding: EdgeInsets.only(left: 15, bottom: 31.25),
+                title: SizedBox(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        "Televisión",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontWeight: FontWeight.w400),
+                      ),
+                      Text("Dominicana",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontWeight: FontWeight.w400))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ];
+        },
+        body: Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: FutureBuilder<List<Canal>>(
+              future: fetchCanal(http.Client()),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) print(snapshot.error);
+                return snapshot.hasData
+                    ? CanalList(
+                        canales: snapshot.data,
+                      )
+                    : Center(child: CircularProgressIndicator());
+              }),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.search),
+        label: Text("Buscar"),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BuscarCanal(),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class CanalList extends StatelessWidget {
+
+  final List<Canal> canales;
+  CanalList({Key key, @required this.canales}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemCount: canales.length,
+            separatorBuilder: (BuildContext context, int index) {
+         if (index % 15 == 2){
+             return AdmobBanner(
+            adUnitId: getBannerId(),
+            adSize: AdmobBannerSize.BANNER,
+          ); 
+         }
+    return Divider(height: 0, color: Color(0xffFAF4F5),);
+      },
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Text(
+            canales[index].title,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
+          ),
+          subtitle: Text(
+            "Canal: " + canales[index].canal,
+            style: TextStyle(fontSize: 14),
+          ),
+          leading: Image.network(canales[index].imgUrl),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TvProfile(canal: canales[index]),
+              ),
+            );
+          },
+        );
+      },
+
+      
+    );
+  }
+
+
+  String getBannerId() {
+    if (Platform.isAndroid) {
+      return "ca-app-pub-3684382582844010/2981950703";
+    } else if (Platform.isIOS) {
+      return "ca-app-pub-3940256099942544/4339318960";
+    } else {
+      throw new UnsupportedError("Unsupported platform");
+    }
+  }
+
+}
+
