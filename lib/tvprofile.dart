@@ -6,7 +6,6 @@ import 'package:video_player/video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
 import 'package:email_launcher/email_launcher.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 
 class TvProfile extends StatefulWidget {
@@ -18,7 +17,6 @@ class TvProfile extends StatefulWidget {
 
 class _TvProfile extends State<TvProfile> {
   Canal canal;
-  BannerAd _bannerAd;
   FlickManager flickManager;
 
   //Cargar infocanal
@@ -159,8 +157,6 @@ class _TvProfile extends State<TvProfile> {
 
   @override
   void dispose() {
-    _bannerAd?.dispose();
-
     flickManager.dispose();
     super.dispose();
   }

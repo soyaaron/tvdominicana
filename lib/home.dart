@@ -1,15 +1,13 @@
 import 'dart:io';
-
-import 'package:admob_flutter/admob_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 import 'package:tvdominicana/tvprofile.dart';
 import 'package:tvdominicana/search.dart';
 import 'package:tvdominicana/more.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
+import 'package:admob_flutter/admob_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 import 'package:http/http.dart' as http;
-
 
 class Homepage extends StatefulWidget {
   @override
@@ -19,7 +17,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
-
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeContent(),
@@ -99,8 +96,10 @@ class HomeContent extends StatelessWidget {
             ),
           ];
         },
+        //generar y cargar lista
         body: Padding(
           padding: const EdgeInsets.only(top: 5),
+          
           child: FutureBuilder<List<Canal>>(
               future: fetchCanal(http.Client()),
               builder: (context, snapshot) {
@@ -130,7 +129,6 @@ class HomeContent extends StatelessWidget {
 }
 
 class CanalList extends StatelessWidget {
-
   final List<Canal> canales;
   CanalList({Key key, @required this.canales}) : super(key: key);
 
@@ -138,14 +136,17 @@ class CanalList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: canales.length,
-            separatorBuilder: (BuildContext context, int index) {
-         if (index % 15 == 2){
-             return AdmobBanner(
+      separatorBuilder: (BuildContext context, int index) {
+        if (index % 15 == 2) {
+          return AdmobBanner(
             adUnitId: getBannerId(),
             adSize: AdmobBannerSize.BANNER,
-          ); 
-         }
-    return Divider(height: 0, color: Color(0xffFAF4F5),);
+          );
+        }
+        return Divider(
+          height: 0,
+          color: Color(0xffFAF4F5),
+        );
       },
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
@@ -168,11 +169,8 @@ class CanalList extends StatelessWidget {
           },
         );
       },
-
-      
     );
   }
-
 
   String getBannerId() {
     if (Platform.isAndroid) {
@@ -183,6 +181,4 @@ class CanalList extends StatelessWidget {
       throw new UnsupportedError("Unsupported platform");
     }
   }
-
 }
-
