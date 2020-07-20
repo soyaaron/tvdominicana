@@ -163,7 +163,7 @@ class _TvProfile extends State<TvProfile> {
 
   String getBannerId() {
     if (Platform.isAndroid) {
-      return "ca-app-pub-3684382582844010/7891071574";
+      return "ca-app-pub-3940256099942544/6300978111";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
     } else {

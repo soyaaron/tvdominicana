@@ -17,6 +17,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
+  
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeContent(),
@@ -25,6 +26,15 @@ class _HomeState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _children[_currentIndex],
+      persistentFooterButtons: <Widget>[
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: AdmobBanner(
+            adUnitId: getBannerId(),
+            adSize: AdmobBannerSize.BANNER,
+          ),
+        ),
+      ],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: [
@@ -44,6 +54,16 @@ class _HomeState extends State<Homepage> {
         },
       ),
     );
+  }
+
+  String getBannerId() {
+    if (Platform.isAndroid) {
+      return "ca-app-pub-3940256099942544/6300978111";
+    } else if (Platform.isIOS) {
+      return "ca-app-pub-3940256099942544/4339318960";
+    } else {
+      throw new UnsupportedError("Unsupported platform");
+    }
   }
 }
 
@@ -98,8 +118,7 @@ class HomeContent extends StatelessWidget {
         },
         //generar y cargar lista
         body: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          
+          padding: const EdgeInsets.all(5),
           child: FutureBuilder<List<Canal>>(
               future: fetchCanal(http.Client()),
               builder: (context, snapshot) {
@@ -134,20 +153,20 @@ class CanalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
       itemCount: canales.length,
-      separatorBuilder: (BuildContext context, int index) {
-        if (index % 15 == 2) {
-          return AdmobBanner(
-            adUnitId: getBannerId(),
-            adSize: AdmobBannerSize.BANNER,
-          );
-        }
-        return Divider(
-          height: 0,
-          color: Color(0xffFAF4F5),
-        );
-      },
+      // separatorBuilder: (BuildContext context, int index) {
+      //   if (index % 15 == 2) {
+      //     return AdmobBanner(
+      //       adUnitId: getBannerId(),
+      //       adSize: AdmobBannerSize.BANNER,
+      //     );
+      //   }
+      //   return Divider(
+      //     height: 0,
+      //     color: Color(0xffFAF4F5),
+      //   );
+      // },
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           title: Text(
@@ -170,15 +189,5 @@ class CanalList extends StatelessWidget {
         );
       },
     );
-  }
-
-  String getBannerId() {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3684382582844010/2981950703";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544/4339318960";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
   }
 }

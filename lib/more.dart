@@ -75,8 +75,10 @@ class _MoreState extends State<More> {
           ],
         ),
       ),
+
     );
   }
+
 
   //Contacto dev
   void _launchMail() async {
