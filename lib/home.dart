@@ -90,7 +90,7 @@ class HomeContent extends StatelessWidget {
                     icon: Icon(Icons.share),
                     onPressed: () {
                       Share.share(
-                          "¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
+                          "¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descárgala yá en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
                     }),
               ],
               flexibleSpace: FlexibleSpaceBar(

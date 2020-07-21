@@ -61,7 +61,7 @@ class _TvProfile extends State<TvProfile> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: Container(
-                    width: 350,
+                    width: 330,
                     height: 70,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -83,7 +83,7 @@ class _TvProfile extends State<TvProfile> {
                               onPressed: () {
                                 Share.share("¡Estoy viendo " +
                                     canal.title +
-                                    " en esta aplicación! Descargala aquí y disfruta: https://www.google.com/");
+                                    " en esta aplicación! Descárgala aquí y disfruta este y más: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
                               },
                               icon: Icon(Icons.share),
                               tooltip: "Compartir",

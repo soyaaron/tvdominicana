@@ -54,7 +54,7 @@ class _MoreState extends State<More> {
               title: Text("Compartir App"),
               leading: Icon(Icons.share, color: Colors.grey),
               onTap: () {
-                Share.share("¡Descarga Television Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://www.google.com/");
+                Share.share("¡Descarga Television Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
               },
             ),
                         ListTile(
@@ -99,7 +99,7 @@ class _MoreState extends State<More> {
 
 //lanzar rese;as
   _launchURL() async {
-    const url = 'https://flutter.dev';
+    const url = 'https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
