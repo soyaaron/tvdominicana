@@ -27,7 +27,6 @@ class _TvProfile extends State<TvProfile> {
 
   @override
   void initState() {
-
     //Video
     super.initState();
     flickManager = FlickManager(
@@ -50,13 +49,12 @@ class _TvProfile extends State<TvProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(canal.title)),
-      body: Wrap (
-         children: <Widget>[
+      body: Wrap(
+        children: <Widget>[
           Container(child: FlickVideoPlayer(flickManager: flickManager)),
           //Botones de informacion
           Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(15),
@@ -87,7 +85,6 @@ class _TvProfile extends State<TvProfile> {
                               },
                               icon: Icon(Icons.share),
                               tooltip: "Compartir",
-                              
                             ),
                             Text("Compartir")
                           ],
@@ -107,18 +104,14 @@ class _TvProfile extends State<TvProfile> {
               ),
             ],
           ),
-          Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: <Widget>[AdmobBanner(
-            adUnitId: getBannerId(),
-            adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
-          ),]
-          )
-          
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            AdmobBanner(
+              adUnitId: getBannerId(),
+              adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
+            ),
+          ])
         ],
       ),
-      
     );
     // Mail
   }
@@ -163,7 +156,7 @@ class _TvProfile extends State<TvProfile> {
 
   String getBannerId() {
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-3684382582844010/7891071574";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
     } else {

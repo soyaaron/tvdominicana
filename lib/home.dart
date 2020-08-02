@@ -17,7 +17,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
-  
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeContent(),
@@ -58,7 +57,7 @@ class _HomeState extends State<Homepage> {
 
   String getBannerId() {
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-3684382582844010/2981950703";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
     } else {
@@ -155,18 +154,6 @@ class CanalList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: canales.length,
-      // separatorBuilder: (BuildContext context, int index) {
-      //   if (index % 15 == 2) {
-      //     return AdmobBanner(
-      //       adUnitId: getBannerId(),
-      //       adSize: AdmobBannerSize.BANNER,
-      //     );
-      //   }
-      //   return Divider(
-      //     height: 0,
-      //     color: Color(0xffFAF4F5),
-      //   );
-      // },
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           title: Text(
@@ -177,7 +164,7 @@ class CanalList extends StatelessWidget {
             "Canal: " + canales[index].canal,
             style: TextStyle(fontSize: 14),
           ),
-          leading: Image.network(canales[index].imgUrl),
+          leading:Icon(Icons.tv),   // Image.network(canales[index].imgUrl),
           onTap: () {
             Navigator.push(
               context,

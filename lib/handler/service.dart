@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:tvdominicana/handler/model.dart';
 
 Future<List<Canal>> fetchCanal(http.Client client) async {
-  final response =
-      await http.get('https://soyaaron.github.io/tvchanneljson/test.json',
-      );
+  final response = await http.get(
+    'https://soyaaron.github.io/tvchanneljson/test.json',
+  );
 
   // Use the compute function to run parseCanal in a separate isolate.
   return compute(parseCanal, response.body);
@@ -19,5 +19,3 @@ List<Canal> parseCanal(String responseBody) {
 
   return parsed.map<Canal>((json) => Canal.fromJson(json)).toList();
 }
-
-
