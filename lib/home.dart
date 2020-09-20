@@ -164,7 +164,7 @@ class CanalList extends StatelessWidget {
             "Canal: " + canales[index].canal,
             style: TextStyle(fontSize: 14),
           ),
-          leading:Icon(Icons.tv),   // Image.network(canales[index].imgUrl),
+          leading: Image.network(canales[index].imgUrl),
           onTap: () {
             Navigator.push(
               context,
