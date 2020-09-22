@@ -4,8 +4,9 @@ class Canal {
   final String canal;
   final String imgUrl;
   final String streamUrl;
+  final bool iframe;
 
-  Canal({this.id, this.title, this.canal, this.imgUrl, this.streamUrl});
+  Canal({this.id, this.title, this.canal, this.imgUrl, this.streamUrl,this.iframe});
 
 //Tutorial parsing
   factory Canal.fromJson(Map<String, dynamic> json) {
@@ -14,7 +15,8 @@ class Canal {
       title: json['title'] as String,
       canal: json['canal'] as String,
       imgUrl: json['imgURL'] as String,
-      streamUrl: json['streamURL'] as String
+      streamUrl: json['streamURL'] as String,
+      iframe: json['iframe']as bool
     );
   }
 
@@ -25,6 +27,7 @@ class Canal {
     'canal':canal,
     'imgURL':imgUrl,
     'streamURL':streamUrl,
+    'iframe':iframe,
   };
 
 

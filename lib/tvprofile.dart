@@ -7,6 +7,7 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
 import 'package:email_launcher/email_launcher.dart';
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
@@ -45,13 +46,27 @@ class _TvProfile extends State<TvProfile> {
     await EmailLauncher.launch(email);
   }
 
+// diferenciar entre iframe, native 
+  Widget playerCase() {
+    if (canal.iframe == true) {
+      return
+          HtmlWidget(
+            canal.streamUrl,
+            webView: true,      );
+      
+    } else {
+      return FlickVideoPlayer(flickManager: flickManager);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(canal.title)),
       body: Wrap(
         children: <Widget>[
-          Container(child: FlickVideoPlayer(flickManager: flickManager)),
+          playerCase(),
+
           //Botones de informacion
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
