@@ -53,27 +53,33 @@ class _BuscarCanal extends State<BuscarCanal> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return index == 0 ? barraBusqueda() : listaItem(index - 1);
-        },
-        itemCount: resultBusqueda.length + 1,
-      ),
-      persistentFooterButtons: <Widget>[
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: AdmobBanner(
-            adUnitId: getBannerId(),
-            adSize: AdmobBannerSize.BANNER,
+      body:Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: AdmobBanner(
+              adUnitId: getBannerId(),
+              adSize: AdmobBannerSize.FULL_BANNER,
+            ),
           ),
-        ),
-      ],
+         new Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return index == 0 ? barraBusqueda() : listaItem(index - 1);
+              },
+              itemCount: resultBusqueda.length + 1,
+            ),
+          ),
+        ],
+      ),
+
     );
   }
 
   String getBannerId() {
     if (Platform.isAndroid) {
-      return "ca-app-pub-3684382582844010/8461508091";
+      return "ca-app-pub-3940256099942544/6300978111";
+      // return "ca-app-pub-3684382582844010/8461508091";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
     } else {
