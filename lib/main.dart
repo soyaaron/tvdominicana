@@ -22,6 +22,10 @@ void main() {
     scaffoldBackgroundColor: Color(fondo)
 
     ),
+    darkTheme: ThemeData(
+brightness: Brightness.dark
+    ),
+
     home: Scaffold(
       body: Homepage(),
     ),
