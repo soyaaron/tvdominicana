@@ -24,16 +24,24 @@ class _HomeState extends State<Homepage> {
   ];
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _children[_currentIndex],
-      persistentFooterButtons: <Widget>[
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: AdmobBanner(
-            adUnitId: getBannerId(),
-            adSize: AdmobBannerSize.BANNER,
+      body: Column(
+        children: [
+          new Expanded(child: _children[_currentIndex]),
+          AdmobBanner(
+            adUnitId: getBannerAdUnitId(),
+            adSize: AdmobBannerSize.ADAPTIVE_BANNER(width: 375),
           ),
-        ),
-      ],
+        ],
+      ),
+      // persistentFooterButtons: <Widget>[
+      //   SizedBox(
+      //     width: MediaQuery.of(context).size.width,
+      //     child: AdmobBanner(
+      //       adUnitId: getBannerAdUnitId(),
+      //       adSize: AdmobBannerSize.BANNER,
+      //     ),
+      //   ),
+      // ],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: [
@@ -55,14 +63,12 @@ class _HomeState extends State<Homepage> {
     );
   }
 
-  String getBannerId() {
+  String getBannerAdUnitId() {
     if (Platform.isAndroid) {
       return "ca-app-pub-3684382582844010/2981950703";
     } else if (Platform.isIOS) {
       return "ca-app-pub-3940256099942544/4339318960";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
+    } return null;
   }
 }
 

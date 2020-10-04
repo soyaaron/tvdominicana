@@ -58,8 +58,8 @@ class _BuscarCanal extends State<BuscarCanal> {
           Padding(
             padding: const EdgeInsets.only(top: 15),
             child: AdmobBanner(
-              adUnitId: getBannerId(),
-              adSize: AdmobBannerSize.FULL_BANNER,
+              adUnitId: getBannerAdUnitId(),
+              adSize: AdmobBannerSize.ADAPTIVE_BANNER(width: 350),
             ),
           ),
          new Expanded(
@@ -76,7 +76,7 @@ class _BuscarCanal extends State<BuscarCanal> {
     );
   }
 
-  String getBannerId() {
+  String getBannerAdUnitId() {
     if (Platform.isAndroid) {
        return "ca-app-pub-3684382582844010/8461508091";
     } else if (Platform.isIOS) {

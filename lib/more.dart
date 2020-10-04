@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:email_launcher/email_launcher.dart';
 
 class More extends StatefulWidget {
   @override
@@ -48,24 +47,22 @@ class _MoreState extends State<More> {
             ListTile(
               title: Text("Calificar"),
               leading: Icon(Icons.rate_review, color: Colors.grey),
-              onTap: _launchURL,
+              onTap: abrirResenas,
             ),
             ListTile(
               title: Text("Compartir App"),
               leading: Icon(Icons.share, color: Colors.grey),
-              onTap: () {
-                Share.share("¡Descarga Television Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
-              },
+              onTap: compartirApp,
             ),
                         ListTile(
               title: Text("Sugerir Canal"),
               leading: Icon(Icons.add_circle_outline, color: Colors.grey),
-              onTap: _launchSuggestion,
+              onTap: correoSugerencia,
             ),
             ListTile(
               title: Text("Contacta al Desarrollador"),
               leading: Icon(Icons.mail_outline, color: Colors.grey),
-              onTap: _launchMail,
+              onTap: correoContacto,
             ),
             ListTile(
               title: Text("Politicas"),
@@ -82,24 +79,32 @@ class _MoreState extends State<More> {
 
 
   //Contacto dev
-  void _launchMail() async {
-    Email email = Email(
-      to: ['aarondev98@gmail.com'],
-      subject: "Contacto al desarrollador",
-    );
-    await EmailLauncher.launch(email);
+  void correoContacto() async {
+       const cnt = 'mailto:aarondev98@gmail.com';
+    if (await canLaunch(cnt)) {
+      await launch(cnt);
+    } else {
+      throw 'Could not launch $cnt';
+    }
   }
   // Sugerencia canal
-   void _launchSuggestion() async {
-    Email email = Email(
-      to: ['aarondev98@gmail.com'],
-      subject: "Sugerencia de canal",
-    );
-    await EmailLauncher.launch(email);
+   void correoSugerencia() async {
+ final Uri mail = Uri(
+   scheme: 'mailto',
+   path: 'aarondev98@gmail.com',
+   queryParameters: {
+     'subject': 'Sugerencia de Canal',
+        }
+);
+String url = mail.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
   }
-
 //lanzar rese;as
-  _launchURL() async {
+  abrirResenas() async {
     const url = 'https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana';
     if (await canLaunch(url)) {
       await launch(url);
@@ -107,6 +112,13 @@ class _MoreState extends State<More> {
       throw 'Could not launch $url';
     }
   }
+
+
+   void compartirApp(){
+  
+  Share.share("¡Descarga Television Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
+
+}
 
 //Politica de privacidad
   void _showprivacy() {
@@ -201,3 +213,4 @@ If you have any questions or suggestions about my Privacy Policy, do not hesitat
     );
   }
 }
+

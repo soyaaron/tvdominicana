@@ -5,9 +5,10 @@ import 'package:tvdominicana/handler/model.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
-import 'package:email_launcher/email_launcher.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
@@ -35,25 +36,13 @@ class _TvProfile extends State<TvProfile> {
     );
   }
 
-  //mail
-  void _launchEmail() async {
-    Email email = Email(
-        to: ['aarondev98@gmail.com'],
-        subject: "El canal " + canal.title + " está teniendo errores",
-        body: "El canal " +
-            canal.canal +
-            " está teniendo error de reproducción (En caso de tener un error diferente por favor especifique)");
-    await EmailLauncher.launch(email);
-  }
-
-// diferenciar entre iframe, native 
+// diferenciar entre iframe, native
   Widget playerCase() {
     if (canal.iframe == true) {
-      return
-          HtmlWidget(
-            canal.streamUrl,
-            webView: true,      );
-      
+      return HtmlWidget(
+        canal.streamUrl,
+        webView: true,
+      );
     } else {
       return FlickVideoPlayer(flickManager: flickManager);
     }
@@ -74,8 +63,8 @@ class _TvProfile extends State<TvProfile> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: Container(
-                    width: 330,
-                    height: 70,
+                    width: 325,
+                    height: 61,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         boxShadow: [
@@ -90,29 +79,29 @@ class _TvProfile extends State<TvProfile> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: () {
-                                Share.share("¡Estoy viendo " +
-                                    canal.title +
-                                    " en esta aplicación! Descárgala aquí y disfruta este y más: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
-                              },
-                              icon: Icon(Icons.share),
-                              tooltip: "Compartir",
+                        FlatButton(
+                          onPressed: compartir,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: <Widget>[
+                                Icon(Icons.share),
+                                Text("Compartir")
+                              ],
                             ),
-                            Text("Compartir")
-                          ],
+                          ),
                         ),
-                        Column(
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: _mailconfirm,
-                              icon: Icon(Icons.bug_report),
-                              tooltip: "Reportar",
+                        FlatButton(
+                          onPressed: _mailconfirm,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: <Widget>[
+                                Icon(Icons.bug_report),
+                                Text("Reportar Canal")
+                              ],
                             ),
-                            Text("Reportar Canal")
-                          ],
+                          ),
                         ),
                       ],
                     )),
@@ -121,7 +110,7 @@ class _TvProfile extends State<TvProfile> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             AdmobBanner(
-              adUnitId: getBannerId(),
+              adUnitId: getBannerAdUnitId(),
               adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
             ),
           ])
@@ -129,6 +118,13 @@ class _TvProfile extends State<TvProfile> {
       ),
     );
     // Mail
+  }
+
+//compartir
+  void compartir() {
+    Share.share("¡Estoy viendo " +
+        canal.title +
+        " en este app! Descárgala aquí y disfruta este y más: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
   }
 
 //confirmacion correo
@@ -153,7 +149,8 @@ class _TvProfile extends State<TvProfile> {
                 },
               ),
               new FlatButton(
-                onPressed: _launchEmail,
+                // onPressed: _launchEmail,
+                 onPressed: _launchMail,
                 child: new Text("Continuar"),
               )
             ],
@@ -163,13 +160,31 @@ class _TvProfile extends State<TvProfile> {
     );
   }
 
+void _launchMail() async {
+
+ final Uri mail = Uri(
+   scheme: 'mailto',
+   path: 'aarondev98@gmail.com',
+   queryParameters: {
+     'subject': 'El canal ' + canal.title + ' está teniendo errores',
+     'body':  'El canal está teniendo error de reproducción (Si es diferente especifique)'
+   }
+);
+String url = mail.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
+}
+
   @override
   void dispose() {
     flickManager.dispose();
     super.dispose();
   }
 
-  String getBannerId() {
+  String getBannerAdUnitId() {
     if (Platform.isAndroid) {
       return "ca-app-pub-3684382582844010/7891071574";
     } else if (Platform.isIOS) {
