@@ -4,10 +4,11 @@ import 'package:tvdominicana/search.dart';
 import 'package:tvdominicana/more.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
-import 'package:admob_flutter/admob_flutter.dart';
+//import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:http/http.dart' as http;
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -27,31 +28,26 @@ class _HomeState extends State<Homepage> {
       body: Column(
         children: [
           new Expanded(child: _children[_currentIndex]),
-          AdmobBanner(
-            adUnitId: getBannerAdUnitId(),
-            adSize: AdmobBannerSize.ADAPTIVE_BANNER(width: 375),
+          // AdmobBanner(
+          //   adUnitId: getBannerAdUnitId(),
+          //   adSize: AdmobBannerSize.ADAPTIVE_BANNER(width: 375),
+          // ),
+          FacebookBannerAd(
+            placementId: "350102749475351_350103932808566",
+            bannerSize: BannerSize.STANDARD,
           ),
         ],
       ),
-      // persistentFooterButtons: <Widget>[
-      //   SizedBox(
-      //     width: MediaQuery.of(context).size.width,
-      //     child: AdmobBanner(
-      //       adUnitId: getBannerAdUnitId(),
-      //       adSize: AdmobBannerSize.BANNER,
-      //     ),
-      //   ),
-      // ],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: [
           new BottomNavigationBarItem(
             icon: Icon(Icons.live_tv),
-            title: Text("Home"),
+            label: "Home",
           ),
           new BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz),
-            title: Text("Más"),
+            label: "Más",
           ),
         ],
         onTap: (index) {
@@ -63,13 +59,17 @@ class _HomeState extends State<Homepage> {
     );
   }
 
-  String getBannerAdUnitId() {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3684382582844010/2981950703";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544/4339318960";
-    } return null;
-  }
+  // String getBannerAdUnitId() {
+  //   if (Platform.isAndroid) {
+  //     // return "ca-app-pub-3684382582844010/2981950703";
+
+  //     //test
+  //     return "ca-app-pub-3940256099942544/6300978111";
+  //   } else if (Platform.isIOS) {
+  //     return "ca-app-pub-3940256099942544/4339318960";
+  //   }
+  //   return null;
+  // }
 }
 
 class HomeContent extends StatelessWidget {
@@ -85,7 +85,7 @@ class HomeContent extends StatelessWidget {
                     bottomLeft: Radius.circular(45),
                     bottomRight: Radius.circular(45)),
               ),
-              expandedHeight: 125,
+              expandedHeight: 110,
               floating: false,
               pinned: false,
               actions: <Widget>[
@@ -158,8 +158,60 @@ class CanalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    // return ListView.builder(
+    //   itemCount: canales.length,
+    //   itemBuilder: (BuildContext context, int index) {
+    //     return ListTile(
+    //       title: Text(
+    //         canales[index].title,
+    //         style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
+    //       ),
+    //       subtitle: Text(
+    //         "Canal: " + canales[index].canal,
+    //         style: TextStyle(fontSize: 14),
+    //       ),
+    //       leading: Image.network(canales[index].imgUrl),
+    //       onTap: () {
+    //         Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //             builder: (context) => TvProfile(canal: canales[index]),
+    //           ),
+    //         );
+    //       },
+    //     );
+    //   },
+    // );
+    int fondo = 0xffFAF4F5;
+    int azul = 0xff2B5CAB;
+    return ListView.separated(
       itemCount: canales.length,
+      separatorBuilder: (BuildContext context, int index) {
+        if (index % 11 == 8) {
+          return FacebookNativeAd(
+            placementId: "350102749475351_370068797478746",
+            adType: NativeAdType.NATIVE_AD,
+            width: double.infinity,
+            height: 300,
+            backgroundColor: Color(fondo),
+            titleColor: Colors.black,
+            descriptionColor: Colors.black,
+            buttonColor: Color(azul),
+            buttonTitleColor: Colors.white,
+            buttonBorderColor: Color(azul),
+            keepAlive:
+                true, //set true if you do not want adview to refresh on widget rebuild
+            keepExpandedWhileLoading:
+                false, // set false if you want to collapse the native ad view when the ad is loading
+            expandAnimationDuraion:
+                300, //in milliseconds. Expands the adview with animation when ad is loaded
+            listener: (result, value) {
+              print("Native Ad: $result --> $value");
+            },
+          );
+        }
+        return Divider();
+      },
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           title: Text(

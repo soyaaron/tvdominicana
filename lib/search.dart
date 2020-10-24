@@ -1,11 +1,12 @@
 import 'dart:io';
 
-import 'package:admob_flutter/admob_flutter.dart';
+//import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:tvdominicana/handler/service.dart';
 import 'package:tvdominicana/tvprofile.dart';
 import 'package:http/http.dart' as http;
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 
 class BuscarCanal extends StatefulWidget {
   @override
@@ -53,16 +54,13 @@ class _BuscarCanal extends State<BuscarCanal> {
           ),
         ),
       ),
-      body:Column(
+      body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15),
-            child: AdmobBanner(
-              adUnitId: getBannerAdUnitId(),
-              adSize: AdmobBannerSize.ADAPTIVE_BANNER(width: 350),
-            ),
+          FacebookBannerAd(
+            placementId: "350102749475351_370038980815061",
+            bannerSize: BannerSize.STANDARD,
           ),
-         new Expanded(
+          new Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return index == 0 ? barraBusqueda() : listaItem(index - 1);
@@ -72,19 +70,18 @@ class _BuscarCanal extends State<BuscarCanal> {
           ),
         ],
       ),
-
     );
   }
 
-  String getBannerAdUnitId() {
-    if (Platform.isAndroid) {
-       return "ca-app-pub-3684382582844010/8461508091";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544/4339318960";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
-  }
+  // String getBannerAdUnitId() {
+  //   if (Platform.isAndroid) {
+  //     return "ca-app-pub-3684382582844010/8461508091";
+  //   } else if (Platform.isIOS) {
+  //     return "ca-app-pub-3940256099942544/4339318960";
+  //   } else {
+  //     throw new UnsupportedError("Unsupported platform");
+  //   }
+  // }
 
   barraBusqueda() {
     return Padding(
@@ -116,7 +113,6 @@ class _BuscarCanal extends State<BuscarCanal> {
                 var nombrecanal = canal.title.toLowerCase();
 
                 return nombrecanal.contains(text);
-                
               }).toList();
             });
           },

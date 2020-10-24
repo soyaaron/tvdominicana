@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tvdominicana/handler/model.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flick_video_player/flick_video_player.dart';
+// import 'package:flick_video_player/flick_video_player.dart';
 import 'package:share/share.dart';
-import 'package:admob_flutter/admob_flutter.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:chewie/chewie.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 
 class TvProfile extends StatefulWidget {
   final Canal canal;
@@ -19,7 +20,8 @@ class TvProfile extends StatefulWidget {
 
 class _TvProfile extends State<TvProfile> {
   Canal canal;
-  FlickManager flickManager;
+  VideoPlayerController _videoPlayerController;
+  ChewieController _chewieController;
 
   //Cargar infocanal
 
@@ -31,20 +33,117 @@ class _TvProfile extends State<TvProfile> {
   void initState() {
     //Video
     super.initState();
-    flickManager = FlickManager(
-      videoPlayerController: VideoPlayerController.network(canal.streamUrl),
+    // flickManager = FlickManager(
+    //   videoPlayerController: VideoPlayerController.network(canal.streamUrl),
+    // );
+    _videoPlayerController = VideoPlayerController.network(canal.streamUrl);
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      aspectRatio: 16 / 9,
+      allowedScreenSleep: false,
+      allowMuting: false,
+      isLive: true,
+      fullScreenByDefault: true,
+      showControlsOnInitialize: false,
+      autoInitialize: true,
+      allowFullScreen: true,
+      placeholder: Container(decoration: BoxDecoration(color: Colors.black87)),
     );
+  }
+
+  @override
+  void dispose() {
+    // flickManager.dispose();
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
+
+    super.dispose();
   }
 
 // diferenciar entre iframe, native
   Widget playerCase() {
-    if (canal.iframe == true) {
-      return HtmlWidget(
-        canal.streamUrl,
-        webView: true,
-      );
-    } else {
-      return FlickVideoPlayer(flickManager: flickManager);
+    var caso = canal.streamType;
+    switch (caso) {
+      case 1:
+        {
+          return HtmlWidget(
+            canal.streamUrl,
+            webView: true,
+          );
+        }
+        break;
+      case 2:
+        {
+          return HtmlWidget(
+            canal.streamUrl,
+            webView: true,
+          );
+        }
+        break;
+
+      case 3:
+        {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Container(
+                    width: 380,
+                    height: 200,
+                    decoration: BoxDecoration(
+                        color: Colors.black87,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: Offset(0, 0))
+                        ],
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(5.75))),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: <Widget>[
+                              Icon(
+                                Icons.info_outline_rounded,
+                                color: Colors.blueGrey[200],
+                                size: 35,
+                              ),
+                              Text(
+                                  "Por el momento este canal no se puede reproducir desde el app, click en el boton para ver desde su pagina web",
+                                  style:
+                                      TextStyle(color: Colors.blueGrey[200])),
+                            ],
+                          ),
+                        ),
+                        MaterialButton(
+                          onPressed: () {
+                            print("thing");
+                          },
+                          color: Colors.white,
+                          child: Text("Visitar Pagina"),
+                          minWidth: 100,
+                        )
+                      ],
+                    )),
+              ),
+            ],
+          );
+        }
+        break;
+
+      default:
+        {
+          return Chewie(
+            controller: _chewieController,
+          );
+        }
+        break;
     }
   }
 
@@ -108,12 +207,18 @@ class _TvProfile extends State<TvProfile> {
               ),
             ],
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            AdmobBanner(
-              adUnitId: getBannerAdUnitId(),
-              adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
-            ),
-          ])
+          //  Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          //   AdmobBanner(
+          //     adUnitId: getBannerAdUnitId(),
+          //     adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
+          //   ),
+          FacebookBannerAd(
+            placementId: Platform.isAndroid
+                ? "350102749475351_369888480830111"
+                : "YOUR_IOS_PLACEMENT_ID",
+            bannerSize: BannerSize.MEDIUM_RECTANGLE,
+          ),
+          //    ])
         ],
       ),
     );
@@ -150,7 +255,7 @@ class _TvProfile extends State<TvProfile> {
               ),
               new FlatButton(
                 // onPressed: _launchEmail,
-                 onPressed: _launchMail,
+                onPressed: _launchMail,
                 child: new Text("Continuar"),
               )
             ],
@@ -160,37 +265,31 @@ class _TvProfile extends State<TvProfile> {
     );
   }
 
-void _launchMail() async {
-
- final Uri mail = Uri(
-   scheme: 'mailto',
-   path: 'aarondev98@gmail.com',
-   queryParameters: {
-     'subject': 'El canal ' + canal.title + ' está teniendo errores',
-     'body':  'El canal está teniendo error de reproducción (Si es diferente especifique)'
-   }
-);
-String url = mail.toString();
+  void _launchMail() async {
+    final Uri mail =
+        Uri(scheme: 'mailto', path: 'aarondev98@gmail.com', queryParameters: {
+      'subject': canal.title + ' tiene errores',
+      'body':
+          'El canal está teniendo error de reproducción (Si es diferente especifique)'
+    });
+    String url = mail.toString();
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       print('Could not launch $url');
     }
-}
-
-  @override
-  void dispose() {
-    flickManager.dispose();
-    super.dispose();
   }
 
-  String getBannerAdUnitId() {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3684382582844010/7891071574";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544/4339318960";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
-  }
+  // String getBannerAdUnitId() {
+  //   if (Platform.isAndroid) {
+  //     // adunit
+  //     // return "ca-app-pub-3684382582844010/7891071574";
+  //     // test
+  //     return "ca-app-pub-3940256099942544/6300978111";
+  //   } else if (Platform.isIOS) {
+  //     return "ca-app-pub-3940256099942544/4339318960";
+  //   } else {
+  //     throw new UnsupportedError("Unsupported platform");
+  //   }
+  // }
 }
