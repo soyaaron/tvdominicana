@@ -56,10 +56,10 @@ class _BuscarCanal extends State<BuscarCanal> {
       ),
       body: Column(
         children: [
-          FacebookBannerAd(
+/*           FacebookBannerAd(
             placementId: "350102749475351_370038980815061",
             bannerSize: BannerSize.STANDARD,
-          ),
+          ), */
           new Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {

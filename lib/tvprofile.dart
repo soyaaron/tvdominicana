@@ -212,12 +212,14 @@ class _TvProfile extends State<TvProfile> {
           //     adUnitId: getBannerAdUnitId(),
           //     adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
           //   ),
-          FacebookBannerAd(
+
+/*           FacebookBannerAd(
             placementId: Platform.isAndroid
                 ? "350102749475351_369888480830111"
                 : "YOUR_IOS_PLACEMENT_ID",
             bannerSize: BannerSize.MEDIUM_RECTANGLE,
           ),
+           */
           //    ])
         ],
       ),

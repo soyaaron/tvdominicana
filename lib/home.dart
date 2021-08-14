@@ -32,10 +32,10 @@ class _HomeState extends State<Homepage> {
           //   adUnitId: getBannerAdUnitId(),
           //   adSize: AdmobBannerSize.ADAPTIVE_BANNER(width: 375),
           // ),
-          FacebookBannerAd(
+/*           FacebookBannerAd(
             placementId: "350102749475351_350103932808566",
             bannerSize: BannerSize.STANDARD,
-          ),
+          ), */
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -188,7 +188,7 @@ class CanalList extends StatelessWidget {
       itemCount: canales.length,
       separatorBuilder: (BuildContext context, int index) {
         if (index % 11 == 8) {
-          return FacebookNativeAd(
+/*           return FacebookNativeAd(
             placementId: "350102749475351_370068797478746",
             adType: NativeAdType.NATIVE_AD,
             width: double.infinity,
@@ -208,7 +208,7 @@ class CanalList extends StatelessWidget {
             listener: (result, value) {
               print("Native Ad: $result --> $value");
             },
-          );
+          ); */
         }
         return Divider();
       },

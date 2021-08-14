@@ -1,4 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+/*import 'package:firebase_messaging/firebase_messaging.dart';
 
 class PushNotificationsManager {
 
@@ -24,4 +24,4 @@ class PushNotificationsManager {
       _initialized = true;
     }
   }
-}
+} */

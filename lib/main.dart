@@ -11,9 +11,9 @@ int rojo = 0xffD8193A;
 void main() {
  //   Admob.initialize();
   // Admob.initialize(testDeviceIds: ['ca-app-pub-3940256099942544~4354546703']);
-FacebookAudienceNetwork.init(
+/*FacebookAudienceNetwork.init(
   // testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6", //optional
-);
+);*/
   runApp(MaterialApp(
      debugShowCheckedModeBanner: false, 
       theme: ThemeData(
