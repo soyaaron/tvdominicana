@@ -1,14 +1,13 @@
 import 'dart:io';
-import 'package:tvdominicana/tvprofile.dart';
-import 'package:tvdominicana/search.dart';
-import 'package:tvdominicana/more.dart';
-import 'package:tvdominicana/handler/model.dart';
-import 'package:tvdominicana/handler/service.dart';
+import 'package:test_drive/tvprofile.dart';
+import 'package:test_drive/search.dart';
+import 'package:test_drive/more.dart';
+import 'package:test_drive/handler/model.dart';
+import 'package:test_drive/handler/service.dart';
 //import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:http/http.dart' as http;
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -80,26 +79,28 @@ class HomeContent extends StatelessWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              backgroundColor: const Color.fromARGB(255, 0, 82, 150),
               shape: ContinuousRectangleBorder(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(45),
                     bottomRight: Radius.circular(45)),
               ),
-              expandedHeight: 110,
+              expandedHeight: 90,
               floating: false,
               pinned: false,
               actions: <Widget>[
                 IconButton(
                     iconSize: 27,
-                    padding: EdgeInsets.only(right: 15, top: 31.25),
+                    padding: EdgeInsets.only(right: 15, top: 25.25),
                     icon: Icon(Icons.share),
+                    color: Colors.white,
                     onPressed: () {
                       Share.share(
-                          "¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descárgala yá en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
+                          "¡Descarga Televisión Dominicana y disfruta de muchos canales en la mejor calidad! Descárgala yá en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.test_drive");
                     }),
               ],
               flexibleSpace: FlexibleSpaceBar(
-                titlePadding: EdgeInsets.only(left: 15, bottom: 31.25),
+                titlePadding: EdgeInsets.only(left: 15, bottom: 25.25),
                 title: SizedBox(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -107,13 +108,10 @@ class HomeContent extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        "Televisión",
+                        "Televisión Dominicana",
                         textAlign: TextAlign.left,
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                        style: TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      Text("Dominicana",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(fontWeight: FontWeight.w400))
                     ],
                   ),
                 ),
@@ -125,91 +123,46 @@ class HomeContent extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(5),
           child: FutureBuilder<List<Canal>>(
-              future: fetchCanal(http.Client()),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) print(snapshot.error);
-                return snapshot.hasData
-                    ? CanalList(
-                        canales: snapshot.data,
-                      )
-                    : Center(child: CircularProgressIndicator());
-              }),
+            future: fetchCanal(http.Client()),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                print(snapshot.error);
+              }
+              return snapshot.hasData
+                  ? CanalList(
+                      canales: snapshot.data!,
+                    )
+                  : Center(child: CircularProgressIndicator());
+            },
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.search),
-        label: Text("Buscar"),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BuscarCanal(),
-            ),
-          );
-        },
-      ),
+//      floatingActionButton: FloatingActionButton.extended(
+//        icon: Icon(Icons.search),
+//        label: Text("Buscar"),
+//        onPressed: () {
+//          Navigator.push(
+//            context,
+//            MaterialPageRoute(
+//              builder: (context) => BuscarCanal(),
+//            ),
+//          );
+//        },
+//      ),
     );
   }
 }
 
 class CanalList extends StatelessWidget {
   final List<Canal> canales;
-  CanalList({Key key, @required this.canales}) : super(key: key);
+  CanalList({Key? key, required this.canales}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // return ListView.builder(
-    //   itemCount: canales.length,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     return ListTile(
-    //       title: Text(
-    //         canales[index].title,
-    //         style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
-    //       ),
-    //       subtitle: Text(
-    //         "Canal: " + canales[index].canal,
-    //         style: TextStyle(fontSize: 14),
-    //       ),
-    //       leading: Image.network(canales[index].imgUrl),
-    //       onTap: () {
-    //         Navigator.push(
-    //           context,
-    //           MaterialPageRoute(
-    //             builder: (context) => TvProfile(canal: canales[index]),
-    //           ),
-    //         );
-    //       },
-    //     );
-    //   },
-    // );
-    int fondo = 0xffFAF4F5;
-    int azul = 0xff2B5CAB;
     return ListView.separated(
       itemCount: canales.length,
       separatorBuilder: (BuildContext context, int index) {
-        if (index % 11 == 8) {
-/*           return FacebookNativeAd(
-            placementId: "350102749475351_370068797478746",
-            adType: NativeAdType.NATIVE_AD,
-            width: double.infinity,
-            height: 300,
-            backgroundColor: Color(fondo),
-            titleColor: Colors.black,
-            descriptionColor: Colors.black,
-            buttonColor: Color(azul),
-            buttonTitleColor: Colors.white,
-            buttonBorderColor: Color(azul),
-            keepAlive:
-                true, //set true if you do not want adview to refresh on widget rebuild
-            keepExpandedWhileLoading:
-                false, // set false if you want to collapse the native ad view when the ad is loading
-            expandAnimationDuraion:
-                300, //in milliseconds. Expands the adview with animation when ad is loaded
-            listener: (result, value) {
-              print("Native Ad: $result --> $value");
-            },
-          ); */
-        }
+        if (index % 11 == 8) {}
         return Divider();
       },
       itemBuilder: (BuildContext context, int index) {

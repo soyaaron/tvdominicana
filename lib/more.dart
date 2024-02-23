@@ -14,32 +14,34 @@ class _MoreState extends State<More> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(125),
+        preferredSize: Size.fromHeight(90),
         child: AppBar(
-        shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(45),
-              bottomRight: Radius.circular(45)),
-        ),
-        flexibleSpace: FlexibleSpaceBar(
-          titlePadding: EdgeInsets.only(left: 15, bottom: 50),
-          title: SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  "Más",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 32.0),
-                ),
-              ],
+          backgroundColor: const Color.fromARGB(255, 0, 82, 150),
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(45),
+                bottomRight: Radius.circular(45)),
+          ),
+          flexibleSpace: FlexibleSpaceBar(
+            titlePadding: EdgeInsets.only(left: 15, bottom: 25),
+            title: SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    "Más",
+                    textAlign: TextAlign.left,
+                    style:
+                        TextStyle(fontWeight: FontWeight.w400, fontSize: 32.0),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
-      ), 
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: Column(
@@ -54,58 +56,55 @@ class _MoreState extends State<More> {
               leading: Icon(Icons.share, color: Colors.grey),
               onTap: compartirApp,
             ),
-                        ListTile(
-              title: Text("Sugerir Canal"),
-              leading: Icon(Icons.add_circle_outline, color: Colors.grey),
-              onTap: correoSugerencia,
-            ),
-            ListTile(
-              title: Text("Contacta al Desarrollador"),
-              leading: Icon(Icons.mail_outline, color: Colors.grey),
-              onTap: correoContacto,
-            ),
+            //ListTile(
+            //  title: Text("Sugerir Canal"),
+            //  leading: Icon(Icons.add_circle_outline, color: Colors.grey),
+            //  onTap: correoSugerencia,
+            //),
+            //ListTile(
+            //  title: Text("Contacta al Desarrollador"),
+            //  leading: Icon(Icons.mail_outline, color: Colors.grey),
+            //  onTap: correoContacto,
+            //),
             ListTile(
               title: Text("Politicas"),
               leading: Icon(Icons.lock_outline, color: Colors.grey),
               onTap: _showprivacy,
             ),
-
           ],
         ),
       ),
-
     );
   }
 
-
   //Contacto dev
   void correoContacto() async {
-       const cnt = 'mailto:aarondev98@gmail.com';
+    const cnt = 'mailto:aarondev98@gmail.com';
     if (await canLaunch(cnt)) {
       await launch(cnt);
     } else {
       throw 'Could not launch $cnt';
     }
   }
+
   // Sugerencia canal
-   void correoSugerencia() async {
- final Uri mail = Uri(
-   scheme: 'mailto',
-   path: 'aarondev98@gmail.com',
-   queryParameters: {
-     'subject': 'Sugerencia de Canal',
-        }
-);
-String url = mail.toString();
+  void correoSugerencia() async {
+    final Uri mail =
+        Uri(scheme: 'mailto', path: 'aarondev98@gmail.com', queryParameters: {
+      'subject': 'Sugerencia de Canal',
+    });
+    String url = mail.toString();
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       print('Could not launch $url');
     }
   }
+
 //lanzar rese;as
   abrirResenas() async {
-    const url = 'https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana';
+    const url =
+        'https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -113,12 +112,10 @@ String url = mail.toString();
     }
   }
 
-
-   void compartirApp(){
-  
-  Share.share("¡Descarga Television Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
-
-}
+  void compartirApp() {
+    Share.share(
+        "¡Descarga Television Dominicana y disfruta de muchos canales en la mejor calidad! Descargala ya en este enlace: https://play.google.com/store/apps/details?id=com.aarondev.tvdominicana");
+  }
 
 //Politica de privacidad
   void _showprivacy() {
@@ -200,8 +197,8 @@ Contact Us
 If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at aarondev98@gmail.com. """),
             ),
             actions: <Widget>[
-              new FlatButton(
-                child: new Text("Cerrar"),
+              TextButton(
+                child: Text("Cerrar"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -213,4 +210,3 @@ If you have any questions or suggestions about my Privacy Policy, do not hesitat
     );
   }
 }
-

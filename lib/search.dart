@@ -2,11 +2,11 @@ import 'dart:io';
 
 //import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:tvdominicana/handler/model.dart';
-import 'package:tvdominicana/handler/service.dart';
-import 'package:tvdominicana/tvprofile.dart';
+import 'package:test_drive/handler/model.dart';
+import 'package:test_drive/handler/service.dart';
+import 'package:test_drive/tvprofile.dart';
 import 'package:http/http.dart' as http;
-import 'package:facebook_audience_network/facebook_audience_network.dart';
+//import 'package:facebook_audience_network/facebook_audience_network.dart';
 
 class BuscarCanal extends StatefulWidget {
   @override
@@ -14,8 +14,8 @@ class BuscarCanal extends StatefulWidget {
 }
 
 class _BuscarCanal extends State<BuscarCanal> {
-  List<Canal> canales = List<Canal>();
-  List<Canal> resultBusqueda = List<Canal>();
+  List<Canal> canales = List<Canal>.empty();
+  List<Canal> resultBusqueda = List<Canal>.empty();
 
   @override
   void initState() {

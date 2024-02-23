@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:tvdominicana/handler/model.dart';
+import 'package:test_drive/handler/model.dart';
 
 Future<List<Canal>> fetchCanal(http.Client client) async {
-  var url = Uri.parse("https://soyaaron.github.io/tvchanneljson/testv2.json");
-  final response = await http.get(
-    url,
-  );
+  var url = Uri.parse("https://soyaaron.github.io/tvchanneljson/test.json");
+  final response = await http.get(url);
 
   // Use the compute function to run parseCanal in a separate isolate.
   return compute(parseCanal, response.body);
