@@ -444,20 +444,20 @@ class _TvProfile extends State<TvProfile> {
                             ),
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            _mailconfirm();
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: <Widget>[
-                                Icon(Icons.bug_report),
-                                Text("Reportar Canal"),
-                              ],
-                            ),
-                          ),
-                        ),
+//                        TextButton(
+//                          onPressed: () {
+//                            _mailconfirm();
+//                          },
+//                          child: Padding(
+//                            padding: const EdgeInsets.all(8.0),
+//                            child: Column(
+//                              children: <Widget>[
+//                                Icon(Icons.bug_report),
+//                                Text("Reportar Canal"),
+//                              ],
+//                            ),
+//                          ),
+//                        ),
                       ],
                     ),
                   ),
@@ -498,11 +498,11 @@ class _TvProfile extends State<TvProfile> {
                   Navigator.of(context).pop();
                 },
               ),
-              new TextButton(
-                // onPressed: _launchEmail,
-                onPressed: _launchMail,
-                child: new Text("Continuar"),
-              )
+//              new TextButton(
+//                // onPressed: _launchEmail,
+//                onPressed: _launchMail,
+//                child: new Text("Continuar"),
+//              )
             ],
           ),
         );
